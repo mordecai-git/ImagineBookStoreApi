@@ -1,4 +1,5 @@
 using ImagineBookStore.Core.Interfaces;
+using System.Text.Json.Serialization;
 
 namespace ImagineBookStore.Core.Models.Utilities;
 
@@ -11,8 +12,7 @@ public class Result<T>
     /// <summary>
     /// Initializes a new instance of the <see cref="Result"/> class.
     /// </summary>
-    public Result()
-    { }
+    public Result() { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Result"/> class with a specified success status.
