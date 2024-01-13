@@ -1,10 +1,13 @@
+using ImagineBookStore.Api;
+using ImagineBookStore.Core.Models;
+using ImagineBookStore.Core.Models.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ImagineBookStoreApi.Controllers
+namespace ImagineBookStore.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class WeatherForecastController : BaseController
     {
         private static readonly string[] Summaries = new[]
         {
@@ -19,15 +22,26 @@ namespace ImagineBookStoreApi.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public IActionResult Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            var result = Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = Random.Shared.Next(-20, 55),
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+
+            throw new Exception("Error occurred.", new NullReferenceException(nameof(result)));
+
+            var res = new SuccessResult(result);
+            return ProcessResponse(res);
+        }
+
+        [HttpPost]
+        public IActionResult Post(TestModel model)
+        {
+            return ProcessResponse(new SuccessResult());
         }
     }
 }

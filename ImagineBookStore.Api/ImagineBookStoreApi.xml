@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ImagineBookStore.Api</name>
+    </assembly>
+    <members>
+        <member name="M:ImagineBookStore.Api.Controllers.BaseController.ProcessResponse(ImagineBookStore.Core.Models.Utilities.Result)">
+            <summary>
+            Returns the appropriate HTTP Response.
+            </summary>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

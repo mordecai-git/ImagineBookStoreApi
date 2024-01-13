@@ -1,4 +1,4 @@
-namespace ImagineBookStoreApi
+namespace ImagineBookStore.Api
 {
     public class WeatherForecast
     {
