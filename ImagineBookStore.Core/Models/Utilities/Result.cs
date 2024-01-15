@@ -121,9 +121,7 @@ public class Result : Result<object>
     /// Initializes a new instance of the <see cref="Result"/> class with a specified success status.
     /// </summary>
     /// <param name="success">A value indicating whether the operation was successful.</param>
-    public Result(bool success) : base(success)
-    {
-    }
+    public Result(bool success) : base(success) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Result"/> class with a specified success status and message.
