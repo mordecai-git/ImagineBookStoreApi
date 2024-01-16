@@ -5,7 +5,12 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImagineBookStore.Api", "ImagineBookStore.Api\ImagineBookStore.Api.csproj", "{09DCDDBE-EA3E-40A0-8293-7323BC9BC393}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImagineBookStore.Core", "ImagineBookStore.Core\ImagineBookStore.Core.csproj", "{C788E2C9-1FF4-415F-8C2A-6253CB9245A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImagineBookStore.Core", "ImagineBookStore.Core\ImagineBookStore.Core.csproj", "{C788E2C9-1FF4-415F-8C2A-6253CB9245A4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{72D83023-EDAD-4E1E-8E12-7CC667F16C35}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
