@@ -1,8 +1,19 @@
 using FluentValidation;
+using ImagineBookStore.Core.Interfaces;
+using ImagineBookStore.Core.Models.App;
+using ImagineBookStore.Core.Models.Input;
+using ImagineBookStore.Core.Services;
+using Mapster;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.IdentityModel.Tokens;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using System.Reflection;
+using System.Text;
 
 namespace ImagineBookStore.Core.Extensions;
 
@@ -10,6 +21,11 @@ public static class ServiceExtensions
 {
     public static IServiceCollection ConfigureServices(this IServiceCollection services, IConfiguration configuration, bool isProduction)
     {
+
+        services.AddDbContext<BookStoreContext>(options =>
+        {
+            options.UseInMemoryDatabase("ImagineBookStoreDb");
+        });
 
         // Add fluent validation.
         services.AddValidatorsFromAssembly(Assembly.Load("ImagineBookStore.Core"));
@@ -30,6 +46,55 @@ public static class ServiceExtensions
             // Replace the default result factory with a custom implementation.
             configuration.OverrideDefaultResultFactoryWith<CustomResultFactory>();
         });
+
+        services.AddHttpContextAccessor();
+
+        services.AddLazyCache();
+
+        services.AddAuthentication(option =>
+        {
+            option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(options =>
+        {
+            options.SaveToken = true;
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = configuration["JwtConfig:Issuer"],
+                ValidAudience = configuration["JwtConfig:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtConfig:Secret"])),
+                ClockSkew = TimeSpan.Zero
+            };
+        });
+
+        services.AddAuthorization(options =>
+        {
+            options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                .RequireAuthenticatedUser()
+                .Build();
+        });
+
+        //Mapster global Setting. This can also be overwritten per transform
+        TypeAdapterConfig.GlobalSettings.Default
+                        .NameMatchingStrategy(NameMatchingStrategy.IgnoreCase)
+                        .IgnoreNullValues(true)
+                        .AddDestinationTransform((string x) => x.Trim())
+                        .AddDestinationTransform((string x) => x ?? "")
+                        .AddDestinationTransform(DestinationTransform.EmptyCollectionIfNull);
+
+        services.AddSingleton<ICacheService, CacheService>();
+
+        services.TryAddScoped<UserSession>();
+        services.TryAddScoped<ITokenGenerator, TokenGenerator>();
+
+        services.TryAddTransient<IAuthService, AuthService>();
+
 
         return services;
     }

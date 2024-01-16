@@ -4,6 +4,16 @@
         <name>ImagineBookStore.Core</name>
     </assembly>
     <members>
+        <member name="P:ImagineBookStore.Core.Models.App.UserRole.UserId">
+            <summary>
+            A foreign key to the user this role is attached to
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.UserRole.RoleId">
+            <summary>
+            A foreign key to the role this user possess
+            </summary>
+        </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.BadErrorResult">
             <summary>
             Represents an error result, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> class.

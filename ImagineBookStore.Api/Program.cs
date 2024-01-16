@@ -2,6 +2,8 @@ using Microsoft.OpenApi.Models;
 using ImagineBookStore.Core.Extensions;
 using Serilog;
 using ImagineBookStore.Core.Middlewares;
+using ImagineBookStore.Core.Models.Configurations;
+using ImagineBookStore.Core.Utilities;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -52,6 +54,7 @@ builder.Services.AddSwaggerGen(swagger =>
 
 // set up app settings helpers
 builder.Services.Configure<AppConfig>(builder.Configuration.GetSection("AppConfig"));
+builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
 
 // build external services
 builder.Services.ConfigureServices(builder.Configuration, builder.Environment.IsProduction());
@@ -69,6 +72,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+PrepDatabase.PrepPopulation(app);
 
 app.Run();
 
