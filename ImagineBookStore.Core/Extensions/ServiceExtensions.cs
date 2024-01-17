@@ -94,6 +94,7 @@ public static class ServiceExtensions
         services.TryAddScoped<ITokenGenerator, TokenGenerator>();
 
         services.TryAddTransient<IAuthService, AuthService>();
+        services.TryAddTransient<IBookService, BookService>();
 
 
         return services;

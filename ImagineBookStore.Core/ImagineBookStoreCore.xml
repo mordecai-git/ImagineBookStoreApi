@@ -4,6 +4,26 @@
         <name>ImagineBookStore.Core</name>
     </assembly>
     <members>
+        <member name="M:ImagineBookStore.Core.Extensions.IQueryableExtensions.ToPaginatedListAsync``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)">
+            <summary>
+            Returns a paginated list.
+            </summary>
+            <typeparam name="T">Type of items in list.</typeparam>
+            <param name="source">A IQueryable instance to apply.</param>
+            <param name="pageIndex">Page number that starts with zero.</param>
+            <param name="pageSize">Size of each page.</param>
+            <returns>Returns a paginated list.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Extensions.IQueryableExtensions.ToPaginatedListAsync``1(System.Linq.IQueryable{``0},System.Int32)">
+            <summary>
+            Returns a paginated list. This function returns 15 rows from specific pageIndex.
+            </summary>
+            <typeparam name="T">Type of items in list.</typeparam>
+            <param name="source">A IQueryable instance to apply.</param>
+            <param name="pageIndex">Page number that starts with zero.</param>
+            <returns>Returns a paginated list.</returns>
+            <remarks>This functionality may not work in SQL Compact 3.5</remarks>
+        </member>
         <member name="P:ImagineBookStore.Core.Models.App.UserRole.UserId">
             <summary>
             A foreign key to the user this role is attached to
@@ -12,6 +32,16 @@
         <member name="P:ImagineBookStore.Core.Models.App.UserRole.RoleId">
             <summary>
             A foreign key to the role this user possess
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.PagingOptionModel.PageIndex">
+            <summary>
+            The page index/number to query. Defaults to 1
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.PagingOptionModel.PageSize">
+            <summary>
+            The page size to return or how many items to return. Defaults to 15
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.BadErrorResult">
