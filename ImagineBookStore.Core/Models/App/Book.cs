@@ -17,6 +17,9 @@ namespace ImagineBookStore.Core.Models.App
         public string Genre { get; set; }
 
         [Required]
+        public decimal Price { get; set; }
+
+        [Required]
         public int TotalStock { get; set; }
 
         public bool IsDeleted { get; set; } = false;

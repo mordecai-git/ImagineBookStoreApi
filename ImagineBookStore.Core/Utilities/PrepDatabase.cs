@@ -73,7 +73,7 @@ public static class PrepDatabase
         }
     }
 
-    private static List<Book> defaultBooks = new List<Book>
+    private static readonly List<Book> defaultBooks = new()
     {
         new Book
         {
