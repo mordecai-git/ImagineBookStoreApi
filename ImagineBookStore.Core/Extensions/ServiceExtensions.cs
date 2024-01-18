@@ -2,6 +2,7 @@ using FluentValidation;
 using ImagineBookStore.Core.Interfaces;
 using ImagineBookStore.Core.Models.App;
 using ImagineBookStore.Core.Models.Input;
+using ImagineBookStore.Core.Models.View;
 using ImagineBookStore.Core.Services;
 using Mapster;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -80,13 +81,18 @@ public static class ServiceExtensions
                 .Build();
         });
 
-        //Mapster global Setting. This can also be overwritten per transform
+        //Mapster global Setting
         TypeAdapterConfig.GlobalSettings.Default
                         .NameMatchingStrategy(NameMatchingStrategy.IgnoreCase)
                         .IgnoreNullValues(true)
                         .AddDestinationTransform((string x) => x.Trim())
                         .AddDestinationTransform((string x) => x ?? "")
                         .AddDestinationTransform(DestinationTransform.EmptyCollectionIfNull);
+
+        TypeAdapterConfig<Cart, CartItemsView>
+               .NewConfig()
+               .Map(dest => dest.AddedAt, src => src.AddedAt.ToLocalTime())
+               .Map(dest => dest.UpdatedAt, src => src.UpdatedAt.ToLocalTime());
 
         services.AddSingleton<ICacheService, CacheService>();
 
@@ -95,7 +101,7 @@ public static class ServiceExtensions
 
         services.TryAddTransient<IAuthService, AuthService>();
         services.TryAddTransient<IBookService, BookService>();
-
+        services.TryAddTransient<ICartService, CartService>();
 
         return services;
     }
