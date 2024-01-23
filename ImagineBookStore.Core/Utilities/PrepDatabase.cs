@@ -12,12 +12,11 @@ public static class PrepDatabase
 {
     public static async void PrepPopulation(IApplicationBuilder app)
     {
-        using (var serviceScope = app.ApplicationServices.CreateScope())
-        {
-            SeedData(serviceScope.ServiceProvider.GetService<BookStoreContext>());
+        using var serviceScope = app.ApplicationServices.CreateScope();
 
-            await CreateFirstUserAsync(serviceScope.ServiceProvider.GetService<IAuthService>());
-        }
+        SeedData(serviceScope.ServiceProvider.GetService<BookStoreContext>());
+
+        await CreateFirstUserAsync(serviceScope.ServiceProvider.GetService<IAuthService>());
     }
 
     private static void SeedData(BookStoreContext context)
@@ -33,10 +32,18 @@ public static class PrepDatabase
                 );
         }
 
+        // add default books
         if (!context.Books.Any())
         {
             context.Books.AddRange(defaultBooks);
         }
+
+        // add default cart for default user
+        if (!context.Carts.Any())
+        {
+            context.Carts.AddRange(defaultCarts);
+        }
+
 
         context.SaveChanges();
     }
@@ -81,7 +88,7 @@ public static class PrepDatabase
             Author = "Robert C. Martin",
             Genre = "Software Architecture",
             TotalStock = 30,
-            Price = 50.50m
+            Amount = 5000.50m
         },
         new Book
         {
@@ -89,7 +96,7 @@ public static class PrepDatabase
             Author = "Mark Richards and Neal Ford",
             Genre = "Software Architecture",
             TotalStock = 20,
-            Price = 54m
+            Amount = 5400m
         },
         new Book
         {
@@ -97,7 +104,7 @@ public static class PrepDatabase
             Author = "Anatoly Volkhover",
             Genre = "Arts & Photography",
             TotalStock = 19,
-            Price = 21.9m
+            Amount = 2100.9m
         },
         new Book
         {
@@ -105,7 +112,7 @@ public static class PrepDatabase
             Author = "Twentieth Century Studios Inc",
             Genre = "Arts & Photography",
             TotalStock = 47,
-            Price = 44m
+            Amount = 4400m
         },
         new Book
         {
@@ -113,7 +120,7 @@ public static class PrepDatabase
             Author = "Studio Ghibli",
             Genre = "Arts & Photography",
             TotalStock = 12,
-            Price = 90m
+            Amount = 9000m
         },
         new Book
         {
@@ -121,7 +128,7 @@ public static class PrepDatabase
             Author = "Liz Cheney",
             Genre = "History",
             TotalStock = 98,
-            Price = 15m
+            Amount = 1500m
         },
         new Book
         {
@@ -129,7 +136,7 @@ public static class PrepDatabase
             Author = "Prince Harry The Duke of Sussex",
             Genre = "History",
             TotalStock = 54,
-            Price = 5m
+            Amount = 500m
         },
         new Book
         {
@@ -137,7 +144,7 @@ public static class PrepDatabase
             Author = "Liz Cheney",
             Genre = "History",
             TotalStock = 37,
-            Price = 109.5m
+            Amount = 10900.5m
         },
         new Book
         {
@@ -145,7 +152,7 @@ public static class PrepDatabase
             Author = "Robert Hardman",
             Genre = "History",
             TotalStock = 12,
-            Price = 10m
+            Amount = 1000m
         },
         new Book
         {
@@ -153,7 +160,7 @@ public static class PrepDatabase
             Author = "Rebecca Struthers",
             Genre = "History",
             TotalStock = 98,
-            Price = 11m
+            Amount = 1100m
         },
         new Book
         {
@@ -161,7 +168,7 @@ public static class PrepDatabase
             Author = "Columbia Law Review",
             Genre = "Law",
             TotalStock = 33,
-            Price = 5.5m
+            Amount = 500.5m
         },
         new Book
         {
@@ -169,7 +176,7 @@ public static class PrepDatabase
             Author = "Mr. Peter Zeihan",
             Genre = "Law",
             TotalStock = 71,
-            Price = 22m
+            Amount = 2200m
         },
         new Book
         {
@@ -177,7 +184,7 @@ public static class PrepDatabase
             Author = "Erwin Chemerinsky",
             Genre = "Law",
             TotalStock = 32,
-            Price = 7m
+            Amount = 700m
         },
         new Book
         {
@@ -185,7 +192,7 @@ public static class PrepDatabase
             Author = "Sun Tzu",
             Genre = "Law",
             TotalStock = 81,
-            Price = 20m
+            Amount = 2000m
         },
         new Book
         {
@@ -193,7 +200,7 @@ public static class PrepDatabase
             Author = "Roger Allan Ford",
             Genre = "Law",
             TotalStock = 18,
-            Price = 45m
+            Amount = 4500m
         },
         new Book
         {
@@ -201,7 +208,7 @@ public static class PrepDatabase
             Author = "Ellen Cassidy",
             Genre = "Law",
             TotalStock = 26,
-            Price = 10m
+            Amount = 1000m
         },
         new Book
         {
@@ -209,7 +216,7 @@ public static class PrepDatabase
             Author = "Joan Rocklin",
             Genre = "Law",
             TotalStock = 72,
-            Price = 22m
+            Amount = 2200m
         },
         new Book
         {
@@ -217,7 +224,7 @@ public static class PrepDatabase
             Author = "Glen Krutz",
             Genre = "Law",
             TotalStock = 53,
-            Price = 88m
+            Amount = 8800m
         },
         new Book
         {
@@ -225,7 +232,7 @@ public static class PrepDatabase
             Author = "Jon Krakauer",
             Genre = "Travel",
             TotalStock = 35,
-            Price = 75m
+            Amount = 7500m
         },
         new Book
         {
@@ -233,7 +240,7 @@ public static class PrepDatabase
             Author = "Rand McNally",
             Genre = "Travel",
             TotalStock = 11,
-            Price = 10.5m
+            Amount = 1000.5m
         },
         new Book
         {
@@ -241,7 +248,7 @@ public static class PrepDatabase
             Author = "Walter Isaacson",
             Genre = "Business & Money",
             TotalStock = 11,
-            Price = 5.5m
+            Amount = 500.5m
         },
         new Book
         {
@@ -249,7 +256,7 @@ public static class PrepDatabase
             Author = "Dale Carnegie",
             Genre = "Business & Money",
             TotalStock = 57,
-            Price = 7m
+            Amount = 700m
         },
         new Book
         {
@@ -257,7 +264,7 @@ public static class PrepDatabase
             Author = "Robert T. Kiyosaki",
             Genre = "Business & Money",
             TotalStock = 12,
-            Price = 6.4m
+            Amount = 600.4m
         },
         new Book
         {
@@ -265,7 +272,29 @@ public static class PrepDatabase
             Author = "Robert Greene",
             Genre = "Business & Money",
             TotalStock = 90,
-            Price = 10m
+            Amount = 1000m
+        }
+    };
+
+    private static readonly List<Cart> defaultCarts = new()
+    {
+        new Cart
+        {
+            UserId = 1,
+            BookId = 3,
+            Quantity = 2
+        },
+        new Cart
+        {
+            UserId = 1,
+            BookId = 7,
+            Quantity = 3
+        },
+        new Cart
+        {
+            UserId = 1,
+            BookId = 9,
+            Quantity = 5
         }
     };
 }

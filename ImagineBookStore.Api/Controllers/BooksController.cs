@@ -7,8 +7,7 @@ namespace ImagineBookStore.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/books")]
-[AllowAnonymous] // TODO: remove this
-// [Authorize] TODO: activate this
+ [Authorize]
 public class BooksController : BaseController
 {
     private readonly IBookService _bookService;
