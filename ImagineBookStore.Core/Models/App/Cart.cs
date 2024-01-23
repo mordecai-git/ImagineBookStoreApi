@@ -13,8 +13,6 @@ public class Cart : BaseAppModel
     [Required]
     public int Quantity { get; set; }
 
-    public DateTime AddedAt { get; set; } = DateTime.UtcNow;
-
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
     public User User { get; set; }

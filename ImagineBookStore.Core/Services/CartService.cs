@@ -56,12 +56,13 @@ public class CartService : ICartService
     public async Task<Result> ListCarts()
     {
         var cartItems = await _context.Carts
+            .Where(c => c.UserId == _userSession.UserId)
             .ProjectToType<CartItemsView>()
             .ToListAsync();
 
         var result = new CartView
         {
-            TotalPrice = cartItems.Sum(c => c.TotalPrice),
+            TotalAmount = cartItems.Sum(c => c.TotalAmount),
             Items = cartItems
         };
 

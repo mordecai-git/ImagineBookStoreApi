@@ -2,7 +2,7 @@
 
 public class CartView
 {
-    public decimal TotalPrice { get; set; }
+    public decimal TotalAmount { get; set; }
     public List<CartItemsView> Items { get; set; }
 }
 
@@ -13,17 +13,18 @@ public class CartItemsView
     public int BookId { get; set; }
     public string BookTitle { get; set; }
     public string BookAuthor { get; set; }
-    public decimal BookPrice { get; set; }
+    public decimal BookAmount { get; set; }
 
     public int Quantity { get; set; }
-    public decimal TotalPrice
+    public decimal TotalAmount
     {
         get
         {
-            return Quantity * BookPrice;
+            return Quantity * BookAmount;
         }
     }
 
-    public DateTime AddedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
+    public bool IsStillAvailable { get; set; }
 }

@@ -7,8 +7,7 @@ namespace ImagineBookStore.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/carts")]
-[AllowAnonymous] // TODO: remove this
-// [Authorize] TODO: activate this
+ [Authorize]
 public class CartsController : BaseController
 {
     private readonly ICartService _cartService;

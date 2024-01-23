@@ -17,7 +17,7 @@ public class Book : BaseAppModel
     public string Genre { get; set; }
 
     [Required]
-    public decimal Price { get; set; }
+    public decimal Amount { get; set; }
 
     [Required]
     public int TotalStock { get; set; }

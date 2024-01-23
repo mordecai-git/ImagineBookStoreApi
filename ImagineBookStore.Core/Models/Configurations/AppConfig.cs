@@ -2,5 +2,4 @@
 
 public class AppConfig
 {
-    public string TinifyKey { get; set; }
 }

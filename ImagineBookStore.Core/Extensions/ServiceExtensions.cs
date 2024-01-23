@@ -81,6 +81,24 @@ public static class ServiceExtensions
                 .Build();
         });
 
+        // set up Paystack HttpClient
+        string paystackHttpClientName = configuration["Paystack:HttpClientName"];
+        ArgumentException.ThrowIfNullOrEmpty(paystackHttpClientName);
+
+        string paystackKey = configuration["Paystack:Key"];
+        ArgumentException.ThrowIfNullOrEmpty(paystackKey);
+
+        services.AddHttpClient(
+            paystackHttpClientName,
+            client =>
+            {
+                // Set the base address of the named client.
+                client.BaseAddress = new Uri("https://api.paystack.co/");
+
+                // Add a user-agent default request header.
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", paystackKey);
+            });
+
         //Mapster global Setting
         TypeAdapterConfig.GlobalSettings.Default
                         .NameMatchingStrategy(NameMatchingStrategy.IgnoreCase)
@@ -91,7 +109,13 @@ public static class ServiceExtensions
 
         TypeAdapterConfig<Cart, CartItemsView>
                .NewConfig()
-               .Map(dest => dest.AddedAt, src => src.AddedAt.ToLocalTime())
+               .Map(dest => dest.CreatedAt, src => src.CreatedAt.ToLocalTime())
+               .Map(dest => dest.UpdatedAt, src => src.UpdatedAt.ToLocalTime())
+               .Map(dest => dest.IsStillAvailable, src => src.Book.TotalStock >= src.Quantity);
+
+        TypeAdapterConfig<Order, OrderView>
+               .NewConfig()
+               .Map(dest => dest.CreatedAt, src => src.CreatedAt.ToLocalTime())
                .Map(dest => dest.UpdatedAt, src => src.UpdatedAt.ToLocalTime());
 
         services.AddSingleton<ICacheService, CacheService>();
@@ -102,6 +126,7 @@ public static class ServiceExtensions
         services.TryAddTransient<IAuthService, AuthService>();
         services.TryAddTransient<IBookService, BookService>();
         services.TryAddTransient<ICartService, CartService>();
+        services.TryAddTransient<IOrderService, OrderService>();
 
         return services;
     }

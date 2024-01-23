@@ -80,6 +80,7 @@ builder.Services.AddSwaggerGen(swagger =>
 // set up app settings helpers
 builder.Services.Configure<AppConfig>(builder.Configuration.GetSection("AppConfig"));
 builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
+builder.Services.Configure<PasystackConfig>(builder.Configuration.GetSection("Paystack"));
 
 // build external services
 builder.Services.ConfigureServices(builder.Configuration, builder.Environment.IsProduction());
@@ -94,7 +95,11 @@ app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<JWTMiddleware>();
+app.UseMiddleware<UserSessionMiddleware>();
 
 app.MapControllers();
 
