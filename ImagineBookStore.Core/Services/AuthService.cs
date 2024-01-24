@@ -1,6 +1,5 @@
 using ImagineBookStore.Core.Interfaces;
 using ImagineBookStore.Core.Models.App;
-using ImagineBookStore.Core.Models.App.Constants;
 using ImagineBookStore.Core.Models.Input;
 using ImagineBookStore.Core.Models.Utilities;
 using ImagineBookStore.Core.Utilities;
@@ -9,19 +8,43 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ImagineBookStore.Core.Services;
 
+/// <summary>
+/// Implementation of the authentication services.
+/// </summary>
 public class AuthService : IAuthService
 {
     private readonly BookStoreContext _context;
     private readonly ITokenGenerator _tokenGenerator;
-    private readonly UserSession _userSession;
 
-    public AuthService(BookStoreContext context, ITokenGenerator tokenGenerator, UserSession userSession)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AuthService"/> class.
+    /// </summary>
+    /// <param name="context">The database context for user information. See <see cref="BookStoreContext"/>.</param>
+    /// <param name="tokenGenerator">The token generator for creating and invalidating user tokens. See <see cref="ITokenGenerator"/>.</param>
+    public AuthService(BookStoreContext context, ITokenGenerator tokenGenerator)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         _tokenGenerator = tokenGenerator ?? throw new ArgumentNullException(nameof(tokenGenerator));
-        _userSession = userSession ?? throw new ArgumentNullException(nameof(userSession));
     }
 
+    /// <inheritdoc cref="IAuthService.AuthenticateUser"/>
+    public async Task<Result> AuthenticateUser(LoginModel model)
+    {
+        model.Email = model.Email.ToLower().Trim();
+        User user = await _context.Users
+            .Include(u => u.UserRoles)
+            .FirstOrDefaultAsync(u => u.Email.ToLower() == model.Email);
+
+        if (user == null)
+            return new ErrorResult("Login Failed:", "User does not exist.");
+
+        if (!user.HashedPassword.VerifyPassword(model.Password))
+            return new ErrorResult("Login Failed:", "Invalid email or password");
+
+        return await _tokenGenerator.GenerateJwtToken(user);
+    }
+
+    /// <inheritdoc cref="IAuthService.CreateUser"/>
     public async Task<Result> CreateUser(RegisterModel model)
     {
         // validate user with email doesn't exist
@@ -56,22 +79,7 @@ public class AuthService : IAuthService
         return new SuccessResult(StatusCodes.Status201Created, authData.Content);
     }
 
-    public async Task<Result> AuthenticateUser(LoginModel model)
-    {
-        model.Email = model.Email.ToLower().Trim();
-        User user = await _context.Users
-            .Include(u => u.UserRoles)
-            .FirstOrDefaultAsync(u => u.Email.ToLower() == model.Email);
-
-        if (user == null)
-            return new ErrorResult("Login Failed:", "User does not exist.");
-
-        if (!user.HashedPassword.VerifyPassword(model.Password))
-            return new ErrorResult("Login Failed:", "Invalid email or password");
-
-        return await _tokenGenerator.GenerateJwtToken(user);
-    }
-
+    /// <inheritdoc cref="IAuthService.Logout"/>
     public async Task<Result> Logout(string userReference)
     {
         await _tokenGenerator.InvalidateToken(userReference);

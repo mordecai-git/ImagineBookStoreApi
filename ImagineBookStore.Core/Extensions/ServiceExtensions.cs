@@ -18,11 +18,21 @@ using System.Text;
 
 namespace ImagineBookStore.Core.Extensions;
 
+/// <summary>
+/// Extension methods for configuring services in the application.
+/// </summary>
 public static class ServiceExtensions
 {
+    /// <summary>
+    /// Configures services for the application, including database, validation, authentication, authorization, HTTP context, caching, and various services.
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to add services to.</param>
+    /// <param name="configuration">The configuration for the application.</param>
+    /// <param name="isProduction">A flag indicating whether the application is running in a production environment.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> for method chaining.</returns>
     public static IServiceCollection ConfigureServices(this IServiceCollection services, IConfiguration configuration, bool isProduction)
     {
-
+        // Add in-memory database for BookStoreContext
         services.AddDbContext<BookStoreContext>(options =>
         {
             options.UseInMemoryDatabase("ImagineBookStoreDb");
@@ -48,10 +58,13 @@ public static class ServiceExtensions
             configuration.OverrideDefaultResultFactoryWith<CustomResultFactory>();
         });
 
+        // Add HTTP context accessor
         services.AddHttpContextAccessor();
 
+        // Add LazyCache for caching
         services.AddLazyCache();
 
+        // Add authentication using JWT Bearer scheme
         services.AddAuthentication(option =>
         {
             option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -73,6 +86,7 @@ public static class ServiceExtensions
             };
         });
 
+        // Add authorization with fallback policy
         services.AddAuthorization(options =>
         {
             options.FallbackPolicy = new AuthorizationPolicyBuilder()
@@ -81,13 +95,14 @@ public static class ServiceExtensions
                 .Build();
         });
 
-        // set up Paystack HttpClient
+        // Set up Paystack HttpClient
         string paystackHttpClientName = configuration["Paystack:HttpClientName"];
         ArgumentException.ThrowIfNullOrEmpty(paystackHttpClientName);
 
         string paystackKey = configuration["Paystack:Key"];
         ArgumentException.ThrowIfNullOrEmpty(paystackKey);
 
+        // Configure Paystack HttpClient
         services.AddHttpClient(
             paystackHttpClientName,
             client =>
@@ -99,7 +114,7 @@ public static class ServiceExtensions
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", paystackKey);
             });
 
-        //Mapster global Setting
+        // Mapster global Setting
         TypeAdapterConfig.GlobalSettings.Default
                         .NameMatchingStrategy(NameMatchingStrategy.IgnoreCase)
                         .IgnoreNullValues(true)
@@ -107,22 +122,27 @@ public static class ServiceExtensions
                         .AddDestinationTransform((string x) => x ?? "")
                         .AddDestinationTransform(DestinationTransform.EmptyCollectionIfNull);
 
+        // Mapster configuration for Cart and CartItemsView
         TypeAdapterConfig<Cart, CartItemsView>
                .NewConfig()
                .Map(dest => dest.CreatedAt, src => src.CreatedAt.ToLocalTime())
                .Map(dest => dest.UpdatedAt, src => src.UpdatedAt.ToLocalTime())
                .Map(dest => dest.IsStillAvailable, src => src.Book.TotalStock >= src.Quantity);
 
+        // Mapster configuration for Order and OrderView
         TypeAdapterConfig<Order, OrderView>
                .NewConfig()
                .Map(dest => dest.CreatedAt, src => src.CreatedAt.ToLocalTime())
                .Map(dest => dest.UpdatedAt, src => src.UpdatedAt.ToLocalTime());
 
+        // Add CacheService as a singleton
         services.AddSingleton<ICacheService, CacheService>();
 
+        // Add UserSession and TokenGenerator as scoped services
         services.TryAddScoped<UserSession>();
         services.TryAddScoped<ITokenGenerator, TokenGenerator>();
 
+        // Add application services
         services.TryAddTransient<IAuthService, AuthService>();
         services.TryAddTransient<IBookService, BookService>();
         services.TryAddTransient<ICartService, CartService>();

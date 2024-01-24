@@ -9,17 +9,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ImagineBookStore.Core.Services;
 
+/// <summary>
+/// Implementation of shopping cart service operations.
+/// </summary>
 public class CartService : ICartService
 {
     private readonly BookStoreContext _context;
     private readonly UserSession _userSession;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CartService"/> class.
+    /// </summary>
+    /// <param name="context">The database context for shopping cart operations. See <see cref="BookStoreContext"/>.</param>
+    /// <param name="userSession">The user session information. See <see cref="UserSession"/>.</param>
     public CartService(BookStoreContext context, UserSession userSession)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         _userSession = userSession ?? throw new ArgumentNullException(nameof(userSession));
     }
 
+    /// <inheritdoc cref="ICartService.AddToCart"/>
     public async Task<Result> AddToCart(CartModel model)
     {
         Book book = await _context.Books
@@ -53,6 +62,7 @@ public class CartService : ICartService
             : new ErrorResult(StaticErrorMessages.UnableToSaveChanges);
     }
 
+    /// <inheritdoc cref="ICartService.ListCarts"/>
     public async Task<Result> ListCarts()
     {
         var cartItems = await _context.Carts
@@ -69,6 +79,7 @@ public class CartService : ICartService
         return new SuccessResult(result);
     }
 
+    /// <inheritdoc cref="ICartService.RemoveFromCart"/>
     public async Task<Result> RemoveFromCart(int cartId)
     {
         var cart = await _context.Carts.FindAsync(cartId);

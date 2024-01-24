@@ -111,22 +111,22 @@ public class PagedSuccessResult : Result
 /// Represents a generic successful result with content, derived from the <see cref="Result"/> class.
 /// </summary>
 /// <typeparam name="T">The type of the content.</typeparam>
-public class PagedPagedSuccessResult<T> : Result<T>
+public class PagedSuccessResult<T> : Result<T>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="PagedPagedSuccessResult{T}"/> class with a default success status.
+    /// Initializes a new instance of the <see cref="PagedSuccessResult{T}"/> class with a default success status.
     /// </summary>
-    public PagedPagedSuccessResult() : base(true)
+    public PagedSuccessResult() : base(true)
     {
         Status = StatusCodes.Status200OK;
         Title = "Operation Successful";
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PagedPagedSuccessResult{T}"/> class with specified content.
+    /// Initializes a new instance of the <see cref="PagedSuccessResult{T}"/> class with specified content.
     /// </summary>
     /// <param name="content">The content associated with the success result.</param>
-    public PagedPagedSuccessResult(T content) : base(true)
+    public PagedSuccessResult(T content) : base(true)
     {
         Status = StatusCodes.Status200OK;
         Title = "Operation Successful";
@@ -135,11 +135,11 @@ public class PagedPagedSuccessResult<T> : Result<T>
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PagedPagedSuccessResult{T}"/> class with a specified status and content.
+    /// Initializes a new instance of the <see cref="PagedSuccessResult{T}"/> class with a specified status and content.
     /// </summary>
     /// <param name="status">The HTTP status code of the success result.</param>
     /// <param name="content">The content associated with the success result.</param>
-    public PagedPagedSuccessResult(int status, T content) : base(true)
+    public PagedSuccessResult(int status, T content) : base(true)
     {
         Status = status;
         Title = "Operation Successful";
@@ -148,11 +148,11 @@ public class PagedPagedSuccessResult<T> : Result<T>
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PagedPagedSuccessResult{T}"/> class with a specified title and content.
+    /// Initializes a new instance of the <see cref="PagedSuccessResult{T}"/> class with a specified title and content.
     /// </summary>
     /// <param name="message">The additional message associated with the success result.</param>
     /// <param name="content">The content associated with the success result.</param>
-    public PagedPagedSuccessResult(string message, T content) : base(true, message)
+    public PagedSuccessResult(string message, T content) : base(true, message)
     {
         Status = StatusCodes.Status200OK;
         Content = content;
@@ -160,12 +160,12 @@ public class PagedPagedSuccessResult<T> : Result<T>
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PagedPagedSuccessResult{T}"/> class with specified status code, title, and content.
+    /// Initializes a new instance of the <see cref="PagedSuccessResult{T}"/> class with specified status code, title, and content.
     /// </summary>
     /// <param name="status">The HTTP status code of the success result.</param>
     /// <param name="message">The additional message associated with the success result.</param>
     /// <param name="content">The content associated with the success result.</param>
-    public PagedPagedSuccessResult(int status, string message, T content) : base(true, message)
+    public PagedSuccessResult(int status, string message, T content) : base(true, message)
     {
         Status = status;
         Content = content;

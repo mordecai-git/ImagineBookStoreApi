@@ -4,44 +4,996 @@
         <name>ImagineBookStore.Core</name>
     </assembly>
     <members>
-        <member name="M:ImagineBookStore.Core.Extensions.IQueryableExtensions.ToPaginatedListAsync``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)">
+        <member name="T:ImagineBookStore.Core.Extensions.CustomResultFactory">
+            <summary>
+            Implements an <see cref="T:SharpGrip.FluentValidation.AutoValidation.Mvc.Results.IFluentValidationAutoValidationResultFactory"/> to create custom action results for FluentValidation auto-validation.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Extensions.CustomResultFactory.CreateActionResult(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.ValidationProblemDetails)">
+            <summary>
+            Creates a custom <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> for FluentValidation auto-validation errors.
+            </summary>
+            <param name="context">The action executing context.</param>
+            <param name="validationProblemDetails">The validation problem details containing validation errors.</param>
+            <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.BadRequestObjectResult"/> with a custom error response containing validation errors of type <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult"/>.</returns>
+        </member>
+        <member name="T:ImagineBookStore.Core.Extensions.PaginationExtensions">
+            <summary>
+            Provides extension methods for IQueryable and IEnumerable to handle pagination.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Extensions.PaginationExtensions.ToPaginatedListAsync``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)">
             <summary>
             Returns a paginated list.
             </summary>
-            <typeparam name="T">Type of items in list.</typeparam>
-            <param name="source">A IQueryable instance to apply.</param>
+            <typeparam name="T">Type of items in the list.</typeparam>
+            <param name="source">An IQueryable instance to apply pagination to.</param>
             <param name="pageIndex">Page number that starts with zero.</param>
             <param name="pageSize">Size of each page.</param>
             <returns>Returns a paginated list.</returns>
         </member>
-        <member name="M:ImagineBookStore.Core.Extensions.IQueryableExtensions.ToPaginatedListAsync``1(System.Linq.IQueryable{``0},System.Int32)">
+        <member name="M:ImagineBookStore.Core.Extensions.PaginationExtensions.CreateAsync``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)">
             <summary>
-            Returns a paginated list. This function returns 15 rows from specific pageIndex.
+            Creates a paginated list asynchronously.
             </summary>
-            <typeparam name="T">Type of items in list.</typeparam>
-            <param name="source">A IQueryable instance to apply.</param>
+            <typeparam name="T">Type of items in the list.</typeparam>
+            <param name="source">An IQueryable instance to apply pagination to.</param>
+            <param name="pageIndex">Page number that starts with zero.</param>
+            <param name="pageSize">Size of each page.</param>
+            <returns>A paginated list.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Extensions.PaginationExtensions.ToPaginatedList``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Int32)">
+            <summary>
+            Returns a paginated list from an IEnumerable.
+            </summary>
+            <typeparam name="T">Type of items in the list.</typeparam>
+            <param name="source">An IEnumerable instance to apply pagination to.</param>
+            <param name="pageIndex">Page number that starts with zero.</param>
+            <param name="pageSize">Size of each page.</param>
+            <returns>Returns a paginated list.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Extensions.PaginationExtensions.ToPaginatedListAsync``1(System.Linq.IQueryable{``0},System.Int32)">
+            <summary>
+            Returns a paginated list asynchronously with a fixed page size of 15.
+            </summary>
+            <typeparam name="T">Type of items in the list.</typeparam>
+            <param name="source">An IQueryable instance to apply pagination to.</param>
             <param name="pageIndex">Page number that starts with zero.</param>
             <returns>Returns a paginated list.</returns>
             <remarks>This functionality may not work in SQL Compact 3.5</remarks>
         </member>
+        <member name="M:ImagineBookStore.Core.Extensions.PaginationExtensions.Create``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Int32)">
+            <summary>
+            Creates a paginated list.
+            </summary>
+            <typeparam name="T">Type of items in the list.</typeparam>
+            <param name="source">An IEnumerable instance to apply pagination to.</param>
+            <param name="pageIndex">Page number that starts with zero.</param>
+            <param name="pageSize">Size of each page.</param>
+            <returns>Returns a paginated list.</returns>
+        </member>
+        <member name="T:ImagineBookStore.Core.Extensions.ServiceExtensions">
+            <summary>
+            Extension methods for configuring services in the application.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Extensions.ServiceExtensions.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Boolean)">
+            <summary>
+            Configures services for the application, including database, validation, authentication, authorization, HTTP context, caching, and various services.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> to add services to.</param>
+            <param name="configuration">The configuration for the application.</param>
+            <param name="isProduction">A flag indicating whether the application is running in a production environment.</param>
+            <returns>The modified <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> for method chaining.</returns>
+        </member>
+        <member name="T:ImagineBookStore.Core.Interfaces.IAuthService">
+            <summary>
+            Interface for authentication services.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.IAuthService.CreateUser(ImagineBookStore.Core.Models.Input.RegisterModel)">
+            <summary>
+            Creates a new user with the provided registration details.
+            </summary>
+            <param name="model">The registration model containing user details.</param>
+            <returns>A task representing the asynchronous operation with the result of the user creation.
+            The result type is <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is <see cref="T:ImagineBookStore.Core.Models.View.AuthDataView"/>.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.IAuthService.AuthenticateUser(ImagineBookStore.Core.Models.Input.LoginModel)">
+            <summary>
+            Authenticates a user with the provided login credentials.
+            </summary>
+            <param name="model">The login model containing user credentials.</param>
+            <returns>A task with the authentication result: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is <see cref="T:ImagineBookStore.Core.Models.View.AuthDataView"/>.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.IAuthService.Logout(System.String)">
+            <summary>
+            Logs out the user with the specified reference.
+            </summary>
+            <param name="userReference">The reference of the user to log out.</param>
+            <returns>A task with the logout result: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/>.</returns>
+        </member>
+        <member name="T:ImagineBookStore.Core.Interfaces.IBookService">
+            <summary>
+            Interface for book-related services.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.IBookService.AddBook(ImagineBookStore.Core.Models.Input.BookModel)">
+            <summary>
+            Adds a new book with the provided details.
+            </summary>
+            <param name="model">The book model containing book details.</param>
+            <returns>A task with the result of the book addition: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is <see cref="T:ImagineBookStore.Core.Models.View.BookView"/>.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.IBookService.DeleteBook(System.Int32)">
+            <summary>
+            Deletes the book with the specified ID.
+            </summary>
+            <param name="bookId">The ID of the book to delete.</param>
+            <returns>A task with the result of the book deletion: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/>.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.IBookService.GetBook(System.Int32)">
+            <summary>
+            Retrieves details of the book with the specified ID.
+            </summary>
+            <param name="bookId">The ID of the book to retrieve.</param>
+            <returns>A task with the result of retrieving the book details: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is <see cref="T:ImagineBookStore.Core.Models.View.BookView"/>.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.IBookService.ListBooks(ImagineBookStore.Core.Models.Input.PagingOptionModel)">
+            <summary>
+            Lists books based on the provided paging options.
+            </summary>
+            <param name="request">The paging options for listing books.</param>
+            <returns>A task with the result of listing books: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is a list of <see cref="T:ImagineBookStore.Core.Models.View.BookView"/>.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.IBookService.UpdateBook(System.Int32,ImagineBookStore.Core.Models.Input.BookModel)">
+            <summary>
+            Updates the book with the specified ID using the provided details.
+            </summary>
+            <param name="bookId">The ID of the book to update.</param>
+            <param name="model">The book model containing updated details.</param>
+            <returns>A task with the result of updating the book: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is <see cref="T:ImagineBookStore.Core.Models.View.BookView"/>.</returns>
+        </member>
+        <member name="T:ImagineBookStore.Core.Interfaces.ICacheService">
+            <summary>
+            Interface for caching service operations.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.ICacheService.AddToken(System.String,System.String,System.DateTime)">
+            <summary>
+            Adds a token to the cache with the specified key and expiration time.
+            </summary>
+            <param name="key">The key to identify the cached token.</param>
+            <param name="value">The token value to be cached.</param>
+            <param name="expiresAt">The expiration time for the cached token.</param>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.ICacheService.GetToken(System.String)">
+            <summary>
+            Retrieves a token from the cache using the specified key.
+            </summary>
+            <param name="key">The key to identify the cached token.</param>
+            <returns>A task representing the asynchronous operation with the cached token value.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.ICacheService.RemoveToken(System.String)">
+            <summary>
+            Removes a token from the cache using the specified key.
+            </summary>
+            <param name="key">The key to identify the cached token to be removed.</param>
+        </member>
+        <member name="T:ImagineBookStore.Core.Interfaces.ICartService">
+            <summary>
+            Interface for shopping cart service operations.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.ICartService.AddToCart(ImagineBookStore.Core.Models.Input.CartModel)">
+            <summary>
+            Adds a book to the user's shopping cart.
+            </summary>
+            <param name="model">The cart model containing information about the book and quantity to add.</param>
+            <returns>A task with the result of adding the book to the cart: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/>.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.ICartService.ListCarts">
+            <summary>
+            Lists the items in the user's shopping cart.
+            </summary>
+            <returns>A task with the result of listing the items in the cart: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is <see cref="T:ImagineBookStore.Core.Models.View.CartView"/>.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.ICartService.RemoveFromCart(System.Int32)">
+            <summary>
+            Removes a book from the user's shopping cart.
+            </summary>
+            <param name="cartId">The ID of the cart item to remove.</param>
+            <returns>A task with the result of removing the book from the cart: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/>.</returns>
+        </member>
+        <member name="T:ImagineBookStore.Core.Interfaces.IOrderService">
+            <summary>
+            Interface for order-related service operations.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.IOrderService.AttemptPayment(System.Int32)">
+            <summary>
+            Attempts to process payment for the specified order.
+            </summary>
+            <param name="orderId">The ID of the order to attempt payment for.</param>
+            <returns>A task with the result of the payment attempt: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> where T is <see cref="T:ImagineBookStore.Core.Models.View.PaymentRequestView"/>.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.IOrderService.ConfirmPayment(System.Int32)">
+            <summary>
+            Confirms payment for the specified order.
+            </summary>
+            <param name="orderId">The ID of the order to confirm payment for.</param>
+            <returns>A task with the result of confirming the payment: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/>.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.IOrderService.GetOrderItems(System.Int32)">
+            <summary>
+            Gets the items of the specified order.
+            </summary>
+            <param name="orderId">The ID of the order to retrieve items for.</param>
+            <returns>The result containing the order items: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is a list of <see cref="T:ImagineBookStore.Core.Models.View.OrderItemView"/>.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.IOrderService.ListOrders(ImagineBookStore.Core.Models.Input.PagingOptionModel)">
+            <summary>
+            Lists orders based on the provided paging options.
+            </summary>
+            <param name="request">The paging options for listing orders.</param>
+            <returns>A task with the result of listing orders: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is a list of <see cref="T:ImagineBookStore.Core.Models.View.OrderView"/>.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.IOrderService.PlaceOrder">
+            <summary>
+            Places a new order based on the items in the user's shopping cart.
+            </summary>
+            <returns>A task with the result of placing the order: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is <see cref="T:ImagineBookStore.Core.Models.View.PaymentRequestView"/>.</returns>
+        </member>
+        <member name="T:ImagineBookStore.Core.Interfaces.IPagedList">
+            <summary>
+            Represents information about paging in a collection of items.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Interfaces.IPagedList.PageIndex">
+            <summary>
+            Gets the index of the current page.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Interfaces.IPagedList.PageSize">
+            <summary>
+            Gets the size of each page.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Interfaces.IPagedList.TotalPages">
+            <summary>
+            Gets the total number of pages.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Interfaces.IPagedList.TotalItems">
+            <summary>
+            Gets the total number of items in the entire collection.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Interfaces.IPagedList.HasPreviousPage">
+            <summary>
+            Gets a value indicating whether there is a previous page.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Interfaces.IPagedList.HasNextPage">
+            <summary>
+            Gets a value indicating whether there is a next page.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Interfaces.ITokenGenerator">
+            <summary>
+            Defines the contract for generating and invalidating JWT tokens.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.ITokenGenerator.GenerateJwtToken(ImagineBookStore.Core.Models.App.User)">
+            <summary>
+            Generates a JWT token for the specified user.
+            </summary>
+            <param name="user">The user for whom the token is generated.</param>
+            <returns>A task representing the asynchronous operation with the result containing the generated token. </returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Interfaces.ITokenGenerator.InvalidateToken(System.String)">
+            <summary>
+            Invalidates the JWT token for the specified user reference.
+            </summary>
+            <param name="userReference">The user reference for whom the token should be invalidated. See <see cref="T:System.String"/>.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:ImagineBookStore.Core.Middlewares.ErrorHandlerMiddleware">
+            <summary>
+            Middleware for handling errors and returning appropriate JSON responses.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Middlewares.ErrorHandlerMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{ImagineBookStore.Core.Middlewares.ErrorHandlerMiddleware})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Middlewares.ErrorHandlerMiddleware"/> class.
+            </summary>
+            <param name="next">The next middleware in the pipeline.</param>
+            <param name="logger">The logger for capturing error information.</param>
+        </member>
+        <member name="M:ImagineBookStore.Core.Middlewares.ErrorHandlerMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invokes the middleware to handle errors in the request pipeline.
+            </summary>
+            <param name="context">The HTTP context for the current request.</param>
+        </member>
+        <member name="T:ImagineBookStore.Core.Middlewares.JWTMiddleware">
+            <summary>
+            Middleware for handling JSON Web Token (JWT) authentication.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Middlewares.JWTMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Configuration.IConfiguration,ImagineBookStore.Core.Interfaces.ICacheService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Middlewares.JWTMiddleware"/> class.
+            </summary>
+            <param name="next">The next middleware in the pipeline.</param>
+            <param name="configuration">The configuration instance for accessing application settings.</param>
+            <param name="cacheService">The cache service for storing and retrieving tokens.</param>
+        </member>
+        <member name="M:ImagineBookStore.Core.Middlewares.JWTMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Options.IOptions{ImagineBookStore.Core.Models.Configurations.JwtConfig})">
+            <summary>
+            Invokes the middleware to handle JWT authentication in the request pipeline.
+            </summary>
+            <param name="context">The HTTP context for the current request.</param>
+            <param name="jwtConfig">The configuration options for JWT.</param>
+        </member>
+        <member name="M:ImagineBookStore.Core.Middlewares.JWTMiddleware.IsAnonymous(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Checks if the current route or action is marked as anonymous (skipping JWT authentication).
+            </summary>
+            <param name="context">The HTTP context for the current request.</param>
+            <returns>True if the current route or action is marked as anonymous; otherwise, false.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Middlewares.JWTMiddleware.AttachAccountToContext(Microsoft.AspNetCore.Http.HttpContext,System.String,ImagineBookStore.Core.Models.Configurations.JwtConfig)">
+            <summary>
+            Validates the JWT token and attaches user information to the HTTP context.
+            </summary>
+            <param name="context">The HTTP context for the current request.</param>
+            <param name="token">The JWT token extracted from the request headers.</param>
+            <param name="jwtConfig">The configuration options for JWT.</param>
+            <returns>True if JWT validation is successful and the user is attached to the context; otherwise, false.</returns>
+        </member>
+        <member name="T:ImagineBookStore.Core.Middlewares.UserSessionMiddleware">
+            <summary>
+            Middleware for extracting user session information from the current HTTP context.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Middlewares.UserSessionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Middlewares.UserSessionMiddleware"/> class.
+            </summary>
+            <param name="next">The next middleware in the pipeline.</param>
+        </member>
+        <member name="M:ImagineBookStore.Core.Middlewares.UserSessionMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext,ImagineBookStore.Core.Models.Input.UserSession)">
+            <summary>
+            Invokes the middleware to extract user session information from the current HTTP context.
+            </summary>
+            <param name="context">The HTTP context for the current request.</param>
+            <param name="session">The user session instance to store extracted information.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.App.BaseAppModel">
+            <summary>
+            Represents a base application model with common properties.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.BaseAppModel.Id">
+            <summary>
+            Gets or sets the unique identifier for the model.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.BaseAppModel.CreatedAt">
+            <summary>
+            Gets or sets the creation timestamp of the model in Coordinated Universal Time (UTC).
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.App.Book">
+            <summary>
+            Represents a book in the BookStore application.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Book.Title">
+            <summary>
+            Gets or sets the title of the book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Book.Author">
+            <summary>
+            Gets or sets the author of the book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Book.Genre">
+            <summary>
+            Gets or sets the genre of the book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Book.Amount">
+            <summary>
+            Gets or sets the price of the book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Book.TotalStock">
+            <summary>
+            Gets or sets the total stock quantity of the book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Book.IsDeleted">
+            <summary>
+            Gets or sets a value indicating whether the book is deleted.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Book.DeletedById">
+            <summary>
+            Gets or sets the ID of the user who deleted the book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Book.DeletedAt">
+            <summary>
+            Gets or sets the date and time when the book was deleted.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Book.DeletedBy">
+            <summary>
+            Gets or sets the user who deleted the book.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.App.BookStoreContext">
+            <summary>
+            Represents the DbContext for the BookStore application, providing access to the database entities.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Models.App.BookStoreContext.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext"/> class.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Models.App.BookStoreContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ImagineBookStore.Core.Models.App.BookStoreContext})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext"/> class with the specified options.
+            </summary>
+            <param name="options">The options to be used by the context.</param>
+        </member>
+        <member name="M:ImagineBookStore.Core.Models.App.BookStoreContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Configures the model and defines relationships between entities.
+            </summary>
+            <param name="builder">The model builder used to construct the model for this context.</param>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.BookStoreContext.Roles">
+            <summary>
+            Gets or sets the DbSet representing roles in the database.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.BookStoreContext.Users">
+            <summary>
+            Gets or sets the DbSet representing users in the database.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.BookStoreContext.UserRoles">
+            <summary>
+            Gets or sets the DbSet representing user roles in the database.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.BookStoreContext.Books">
+            <summary>
+            Gets or sets the DbSet representing books in the database.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.BookStoreContext.Carts">
+            <summary>
+            Gets or sets the DbSet representing carts in the database.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.BookStoreContext.Orders">
+            <summary>
+            Gets or sets the DbSet representing orders in the database.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.BookStoreContext.OrderItems">
+            <summary>
+            Gets or sets the DbSet representing order items in the database.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.App.Cart">
+            <summary>
+            Represents a user's shopping cart in the BookStore application.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Cart.UserId">
+            <summary>
+            Gets or sets the ID of the user associated with the cart.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Cart.BookId">
+            <summary>
+            Gets or sets the ID of the book added to the cart.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Cart.Quantity">
+            <summary>
+            Gets or sets the quantity of the book added to the cart.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Cart.UpdatedAt">
+            <summary>
+            Gets or sets the date and time when the cart was last updated.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Cart.User">
+            <summary>
+            Gets or sets the user associated with the cart.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Cart.Book">
+            <summary>
+            Gets or sets the book associated with the cart.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.App.Constants.Roles">
+            <summary>
+            Enumerates the roles available in the BookStore application.
+            </summary>
+        </member>
+        <member name="F:ImagineBookStore.Core.Models.App.Constants.Roles.Admin">
+            <summary>
+            Represents the Admin role with a value of 1.
+            </summary>
+        </member>
+        <member name="F:ImagineBookStore.Core.Models.App.Constants.Roles.User">
+            <summary>
+            Represents the User role with a value of 2.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.App.Order">
+            <summary>
+            Represents an order in the BookStore application.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Order.UserId">
+            <summary>
+            Gets or sets the ID of the user who placed the order.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Order.TotalAmount">
+            <summary>
+            Gets or sets the total amount associated with the order.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Order.UpdatedAt">
+            <summary>
+            Gets or sets the timestamp when the order was last updated.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Order.IsPaid">
+            <summary>
+            Gets or sets a value indicating whether the order has been paid.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Order.Authorization_Url">
+            <summary>
+            Gets or sets the authorization URL associated with the payment.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Order.Access_Code">
+            <summary>
+            Gets or sets the access code associated with the payment.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Order.Reference">
+            <summary>
+            Gets or sets the reference associated with the order.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Order.User">
+            <summary>
+            Gets or sets the reference to the user who placed the order.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Order.Items">
+            <summary>
+            Gets or sets the collection of items associated with the order.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.App.OrderItem">
+            <summary>
+            Represents an item within an order in the BookStore application.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.OrderItem.OrderId">
+            <summary>
+            Gets or sets the ID of the order to which the item belongs.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.OrderItem.BookId">
+            <summary>
+            Gets or sets the ID of the book associated with the order item.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.OrderItem.Quantity">
+            <summary>
+            Gets or sets the quantity of the book in the order.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.OrderItem.Amount">
+            <summary>
+            Gets or sets the amount associated with the order item.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.OrderItem.Order">
+            <summary>
+            Gets or sets the reference to the order to which the item belongs.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.OrderItem.Book">
+            <summary>
+            Gets or sets the reference to the book associated with the order item.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.OrderItem.IsStillAvailable">
+            <summary>
+            Gets or sets a value indicating whether the book is still available (not used in the database).
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.App.Role">
+            <summary>
+            Represents a role in the BookStore application.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Role.Id">
+            <summary>
+            Gets or sets the unique identifier for the role.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Role.Name">
+            <summary>
+            Gets or sets the name of the role.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.Role.UserRoles">
+            <summary>
+            Gets or sets the collection of user roles associated with this role.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.App.User">
+            <summary>
+            Represents a user in the BookStore application.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.User.Uid">
+            <summary>
+            Gets or sets the unique identifier for the user.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.User.Email">
+            <summary>
+            Gets or sets the email address of the user.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.User.FirstName">
+            <summary>
+            Gets or sets the first name of the user.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.User.LastName">
+            <summary>
+            Gets or sets the last name of the user.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.User.HashedPassword">
+            <summary>
+            Gets or sets the hashed password of the user.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.User.UserRoles">
+            <summary>
+            Gets or sets the collection of roles associated with this user.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.App.UserRole">
+            <summary>
+            Represents the association between users and roles in the BookStore application.
+            </summary>
+        </member>
         <member name="P:ImagineBookStore.Core.Models.App.UserRole.UserId">
             <summary>
-            A foreign key to the user this role is attached to
+            Gets or sets the foreign key to the user this role is attached to.
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.App.UserRole.RoleId">
             <summary>
-            A foreign key to the role this user possess
+            Gets or sets the foreign key to the role this user possesses.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.UserRole.Role">
+            <summary>
+            Gets or sets the reference to the role associated with this user role.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.App.UserRole.User">
+            <summary>
+            Gets or sets the reference to the user associated with this user role.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Configurations.AppConfig">
+            <summary>
+            A class that represents the AppConfig section of the appsettings.json config.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Configurations.JwtConfig">
+            <summary>
+            Represents the configuration settings for JWT (JSON Web Token) authentication.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Configurations.JwtConfig.Audience">
+            <summary>
+            Gets or sets the audience of the JWT token.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Configurations.JwtConfig.Expires">
+            <summary>
+            Gets or sets the expiration duration of the JWT token in minutes.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Configurations.JwtConfig.Issuer">
+            <summary>
+            Gets or sets the issuer of the JWT token.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Configurations.JwtConfig.RefreshExpireDays">
+            <summary>
+            Gets or sets the expiration duration of the JWT refresh token in days.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Configurations.JwtConfig.Secret">
+            <summary>
+            Gets or sets the secret key used for signing the JWT token.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Configurations.PasystackConfig">
+            <summary>
+            Represents the configuration settings for interacting with the Paystack API.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Configurations.PasystackConfig.HttpClientName">
+            <summary>
+            Gets or sets the name of the HTTP client used for Paystack API requests.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Input.BookModel">
+            <summary>
+            Represents the model for a book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.BookModel.Title">
+            <summary>
+            The title of the book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.BookModel.Author">
+            <summary>
+            The author of the book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.BookModel.Genre">
+            <summary>
+            The genre of the book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.BookModel.TotalStock">
+            <summary>
+            The total number of copies available.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Input.BookModelValidator">
+            <summary>
+            Validator for the <see cref="T:ImagineBookStore.Core.Models.Input.BookModel"/> class.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Models.Input.BookModelValidator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Input.BookModelValidator"/> class.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Input.CartModel">
+            <summary>
+            Represents a model for cart information, including quantity and book identifier.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.CartModel.Quantity">
+            <summary>
+            Quantity of the book in the cart.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.CartModel.BookId">
+            <summary>
+            Identifier for the associated book.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Input.CartModelValidator">
+            <summary>
+            Validator for the <see cref="T:ImagineBookStore.Core.Models.Input.CartModel"/> class.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Models.Input.CartModelValidator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Input.CartModelValidator"/> class.
+            Defines validation rules for the <see cref="T:ImagineBookStore.Core.Models.Input.CartModel"/>.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Input.LoginModel">
+            <summary>
+            Represents the model for user login.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.LoginModel.Email">
+            <summary>
+            The email address of the user.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.LoginModel.Password">
+            <summary>
+            The password for authentication.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Input.LoginModelValidation">
+            <summary>
+            Validator for the <see cref="T:ImagineBookStore.Core.Models.Input.LoginModel"/> class.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Models.Input.LoginModelValidation.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Input.LoginModelValidation"/> class.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Input.PagingOptionModel">
+            <summary>
+            Represents the paging options for querying data.
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Input.PagingOptionModel.PageIndex">
             <summary>
-            The page index/number to query. Defaults to 1
+            The page index/number to query. Defaults to 1.
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Input.PagingOptionModel.PageSize">
             <summary>
-            The page size to return or how many items to return. Defaults to 15
+            The page size to return or how many items to return. Defaults to 15.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Input.RegisterModel">
+            <summary>
+            Represents the information required to register a new user.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.RegisterModel.Email">
+            <summary>
+            The email address of the user.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.RegisterModel.FirstName">
+            <summary>
+            The first name of the user.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.RegisterModel.LastName">
+            <summary>
+            The last name of the user.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.RegisterModel.Password">
+            <summary>
+            The password for the user.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.RegisterModel.ConfirmPassword">
+            <summary>
+            The confirmation password for the user.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Input.RegisterModelValidation">
+            <summary>
+            Represents the validation rules for the <see cref="T:ImagineBookStore.Core.Models.Input.RegisterModel"/>.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Models.Input.RegisterModelValidation.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Input.RegisterModelValidation"/> class.
+            Defines validation rules for the <see cref="T:ImagineBookStore.Core.Models.Input.RegisterModel"/>.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Input.UserSession">
+            <summary>
+            Represents the user session information.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.UserSession.UserId">
+            <summary>
+            Gets or sets the user ID.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.UserSession.Uid">
+            <summary>
+            Gets or sets the unique identifier for the user.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Input.UserSession.BusinessId">
+            <summary>
+            Gets or sets the business ID.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Paystack.InitiateTransactionModel">
+            <summary>
+            Represents the model for initiating a transaction.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Paystack.InitiateTransactionModel.email">
+            <summary>
+            Email associated with the transaction initiation.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Paystack.InitiateTransactionModel.amount">
+            <summary>
+            Amount for the transaction initiation.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Paystack.InitiateTransactionModel.metadata">
+            <summary>
+            Additional metadata information for the transaction initiation.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Paystack.PaystackResponse`1">
+            <summary>
+            Represents a generic Paystack response with status, message, and generic data payload.
+            </summary>
+            <typeparam name="T">Type of the data payload.</typeparam>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Paystack.PaystackResponse`1.status">
+            <summary>
+            Status of the Paystack response.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Paystack.PaystackResponse`1.message">
+            <summary>
+            Message associated with the Paystack response.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Paystack.PaystackResponse`1.data">
+            <summary>
+            Data payload of the Paystack response, generic type.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Paystack.TransactionResponse">
+            <summary>
+            Represents the response for a transaction, including authorization URL, access code, and reference.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Paystack.TransactionResponse.authorization_url">
+            <summary>
+            URL for user authorization in the transaction response.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Paystack.TransactionResponse.access_code">
+            <summary>
+            Access code associated with the transaction response.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Paystack.TransactionResponse.reference">
+            <summary>
+            Reference identifier for the transaction response.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Paystack.VerifyTransactionResponse">
+            <summary>
+            Represents the response for verifying a transaction, including an identifier and status.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Paystack.VerifyTransactionResponse.id">
+            <summary>
+            Identifier associated with the verified transaction.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Paystack.VerifyTransactionResponse.status">
+            <summary>
+            Status of the verified transaction.
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.BadErrorResult">
@@ -252,6 +1204,154 @@
             <inheritdoc/>
             </summary>
         </member>
+        <member name="T:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult">
+            <summary>
+            Represents a Not found error result, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> class.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult"/> class with a default failure status.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult"/> class with a specified error message.
+            </summary>
+            <param name="message">The error message associated with the result.</param>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.Detail">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.Instance">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.Path">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.TraceInfo">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.ValidationErrors">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.Content">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.Paging">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1">
+            <summary>
+            Represents an error result.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult"/> class with a default failure status.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult"/> class with a specified error message.
+            </summary>
+            <param name="message">The error message associated with the result.</param>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.Detail">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.Instance">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.Path">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.TraceInfo">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.ValidationErrors">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.Content">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.Paging">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Utilities.PagedList`1">
+            <summary>
+            Represents a paged list containing a subset of items of type TDestination.
+            Implements IPagedList for pagination information.
+            </summary>
+            <typeparam name="TDestination">Type of items in the paged list.</typeparam>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.PagedList`1.PageIndex">
+            <summary>
+            Gets or sets the index of the current page.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.PagedList`1.TotalPages">
+            <summary>
+            Gets the total number of pages in the paged list.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.PagedList`1.TotalItems">
+            <summary>
+            Gets the total number of items in the paged list.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.PagedList`1.PageSize">
+            <summary>
+            Gets the size of each page in the paged list.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.PagedList`1.HasPreviousPage">
+            <summary>
+            Gets a value indicating whether there is a previous page.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.PagedList`1.HasNextPage">
+            <summary>
+            Gets a value indicating whether there is a next page.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Models.Utilities.PagedList`1.#ctor(System.Collections.Generic.List{`0},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the PagedList class with a subset of items, total count, page index, and page size.
+            </summary>
+            <param name="items">Subset of items for the current page.</param>
+            <param name="count">Total count of items in the entire collection.</param>
+            <param name="pageIndex">Index of the current page.</param>
+            <param name="pageSize">Size of each page.</param>
+        </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult">
             <summary>
             Represents a successful result, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> class.
@@ -320,68 +1420,103 @@
             <inheritdoc/>
             </summary>
         </member>
-        <member name="T:ImagineBookStore.Core.Models.Utilities.PagedPagedSuccessResult`1">
+        <member name="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1">
             <summary>
             Represents a generic successful result with content, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> class.
             </summary>
             <typeparam name="T">The type of the content.</typeparam>
         </member>
-        <member name="M:ImagineBookStore.Core.Models.Utilities.PagedPagedSuccessResult`1.#ctor">
+        <member name="M:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedPagedSuccessResult`1"/> class with a default success status.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1"/> class with a default success status.
             </summary>
         </member>
-        <member name="M:ImagineBookStore.Core.Models.Utilities.PagedPagedSuccessResult`1.#ctor(`0)">
+        <member name="M:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.#ctor(`0)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedPagedSuccessResult`1"/> class with specified content.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1"/> class with specified content.
             </summary>
             <param name="content">The content associated with the success result.</param>
         </member>
-        <member name="M:ImagineBookStore.Core.Models.Utilities.PagedPagedSuccessResult`1.#ctor(System.Int32,`0)">
+        <member name="M:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.#ctor(System.Int32,`0)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedPagedSuccessResult`1"/> class with a specified status and content.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1"/> class with a specified status and content.
             </summary>
             <param name="status">The HTTP status code of the success result.</param>
             <param name="content">The content associated with the success result.</param>
         </member>
-        <member name="M:ImagineBookStore.Core.Models.Utilities.PagedPagedSuccessResult`1.#ctor(System.String,`0)">
+        <member name="M:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.#ctor(System.String,`0)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedPagedSuccessResult`1"/> class with a specified title and content.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1"/> class with a specified title and content.
             </summary>
             <param name="message">The additional message associated with the success result.</param>
             <param name="content">The content associated with the success result.</param>
         </member>
-        <member name="M:ImagineBookStore.Core.Models.Utilities.PagedPagedSuccessResult`1.#ctor(System.Int32,System.String,`0)">
+        <member name="M:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.#ctor(System.Int32,System.String,`0)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedPagedSuccessResult`1"/> class with specified status code, title, and content.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1"/> class with specified status code, title, and content.
             </summary>
             <param name="status">The HTTP status code of the success result.</param>
             <param name="message">The additional message associated with the success result.</param>
             <param name="content">The content associated with the success result.</param>
         </member>
-        <member name="P:ImagineBookStore.Core.Models.Utilities.PagedPagedSuccessResult`1.Detail">
+        <member name="P:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.Detail">
             <summary>
             <inheritdoc/>
             </summary>
         </member>
-        <member name="P:ImagineBookStore.Core.Models.Utilities.PagedPagedSuccessResult`1.Instance">
+        <member name="P:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.Instance">
             <summary>
             <inheritdoc/>
             </summary>
         </member>
-        <member name="P:ImagineBookStore.Core.Models.Utilities.PagedPagedSuccessResult`1.Path">
+        <member name="P:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.Path">
             <summary>
             <inheritdoc/>
             </summary>
         </member>
-        <member name="P:ImagineBookStore.Core.Models.Utilities.PagedPagedSuccessResult`1.TraceInfo">
+        <member name="P:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.TraceInfo">
             <summary>
             <inheritdoc/>
             </summary>
         </member>
-        <member name="P:ImagineBookStore.Core.Models.Utilities.PagedPagedSuccessResult`1.ValidationErrors">
+        <member name="P:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.ValidationErrors">
             <summary>
             <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Utilities.Paging">
+            <summary>
+            Represents a model containing pagination information.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.Paging.PageIndex">
+            <summary>
+            Index of the current page.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.Paging.PageSize">
+            <summary>
+            Size of each page.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.Paging.TotalPages">
+            <summary>
+            Total number of pages.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.Paging.TotalItems">
+            <summary>
+            Total number of items.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.Paging.HasPreviousPage">
+            <summary>
+            Indicates whether there is a previous page.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.Paging.HasNextPage">
+            <summary>
+            Indicates whether there is a next page.
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.Result`1">
@@ -530,6 +1665,11 @@
             <param name="status">The HTTP status code of the success result.</param>
             <param name="content">The content associated with the successful result.</param>
         </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult.Paging">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult.Detail">
             <summary>
             <inheritdoc/>
@@ -594,6 +1734,11 @@
             <param name="message">The additional message associated with the success result.</param>
             <param name="content">The content associated with the success result.</param>
         </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult`1.Paging">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult`1.Detail">
             <summary>
             <inheritdoc/>
@@ -617,6 +1762,481 @@
         <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult`1.ValidationErrors">
             <summary>
             <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.Utilities.TraceInfo">
+            <summary>
+            Represents information about a trace.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.TraceInfo.FileName">
+            <summary>
+            Name of the file associated with the trace.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.TraceInfo.MethodName">
+            <summary>
+            Name of the method associated with the trace.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.TraceInfo.LineNumber">
+            <summary>
+            Line number within the file where the trace occurred.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.Utilities.TraceInfo.ColumnNumber">
+            <summary>
+            Column number within the file where the trace occurred.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.View.AuthDataView">
+            <summary>
+            Represents the view model for authentication data, including user information, authentication token, and expiration time.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.AuthDataView.User">
+            <summary>
+            Gets or sets the user information.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.AuthDataView.Token">
+            <summary>
+            Gets or sets the authentication token.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.AuthDataView.ExpiresAt">
+            <summary>
+            Gets or sets the expiration time for the authentication token.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.View.BookView">
+            <summary>
+            Represents a view model for displaying book information, including ID, title, author, genre, and total stock.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.BookView.Id">
+            <summary>
+            Identifier for the book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.BookView.Title">
+            <summary>
+            Title of the book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.BookView.Author">
+            <summary>
+            Author of the book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.BookView.Genre">
+            <summary>
+            Genre of the book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.BookView.TotalStock">
+            <summary>
+            Total stock quantity of the book.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.View.CartView">
+            <summary>
+            Represents a view model for displaying cart information.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.CartView.TotalAmount">
+            <summary>
+            Total amount of the items in the cart.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.CartView.Items">
+            <summary>
+            List of cart items in the cart view.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.View.CartItemsView">
+            <summary>
+            Represents a view model for displaying individual cart items.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.CartItemsView.Id">
+            <summary>
+            Identifier for the cart item.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.CartItemsView.BookId">
+            <summary>
+            Identifier for the associated book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.CartItemsView.BookTitle">
+            <summary>
+            Title of the associated book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.CartItemsView.BookAuthor">
+            <summary>
+            Author of the associated book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.CartItemsView.BookAmount">
+            <summary>
+            Amount of the associated book.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.CartItemsView.Quantity">
+            <summary>
+            Quantity of the book in the cart.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.CartItemsView.TotalAmount">
+            <summary>
+            Total amount for the specific cart item (quantity * book amount).
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.CartItemsView.CreatedAt">
+            <summary>
+            Date and time when the cart item was created.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.CartItemsView.UpdatedAt">
+            <summary>
+            Date and time when the cart item was last updated.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.CartItemsView.IsStillAvailable">
+            <summary>
+            Indicates whether the associated book is still available.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.View.OrderItemView">
+            <summary>
+            Represents a view model for displaying information about an item in an order.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.OrderItemView.BookId">
+            <summary>
+            Identifier for the associated book in the order item.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.OrderItemView.BookTitle">
+            <summary>
+            Title of the associated book in the order item.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.OrderItemView.BookAuthor">
+            <summary>
+            Author of the associated book in the order item.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.OrderItemView.Quantity">
+            <summary>
+            Quantity of the associated book in the order item.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.OrderItemView.Amount">
+            <summary>
+            Amount of the associated book in the order item.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.OrderItemView.TotalAmount">
+            <summary>
+            Total amount for the specific order item (quantity * amount).
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.View.OrderView">
+            <summary>
+            Represents a view model for displaying information about an order.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.OrderView.Id">
+            <summary>
+            Identifier for the order.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.OrderView.CreatedAt">
+            <summary>
+            Date and time when the order was created.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.OrderView.TotalAmount">
+            <summary>
+            Total amount for the items in the order.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.OrderView.IsPaid">
+            <summary>
+            Indicates whether the order has been paid.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.OrderView.UpdatedAt">
+            <summary>
+            Date and time when the order was last updated.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.View.PaymentRequestView">
+            <summary>
+            Represents a view model for displaying payment request information.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.PaymentRequestView.Id">
+            <summary>
+            Identifier for the payment request.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.PaymentRequestView.Authorization_Url">
+            <summary>
+            URL for user authorization in the payment request.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.PaymentRequestView.Access_Code">
+            <summary>
+            Access code associated with the payment request.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.PaymentRequestView.Reference">
+            <summary>
+            Reference identifier for the payment request.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.PaymentRequestView.IsPaid">
+            <summary>
+            Indicates whether the payment associated with the request has been made (JsonIgnore).
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Models.View.UserView">
+            <summary>
+            Represents a view model for displaying user information.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.UserView.Id">
+            <summary>
+            Identifier for the user (JsonIgnore).
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.UserView.Uid">
+            <summary>
+            Unique identifier (UID) associated with the user.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.UserView.Email">
+            <summary>
+            Email address of the user.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.UserView.FirstName">
+            <summary>
+            First name of the user.
+            </summary>
+        </member>
+        <member name="P:ImagineBookStore.Core.Models.View.UserView.LastName">
+            <summary>
+            Last name of the user.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Services.AuthService">
+            <summary>
+            Implementation of the authentication services.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.AuthService.#ctor(ImagineBookStore.Core.Models.App.BookStoreContext,ImagineBookStore.Core.Interfaces.ITokenGenerator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.AuthService"/> class.
+            </summary>
+            <param name="context">The database context for user information. See <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext"/>.</param>
+            <param name="tokenGenerator">The token generator for creating and invalidating user tokens. See <see cref="T:ImagineBookStore.Core.Interfaces.ITokenGenerator"/>.</param>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.AuthService.AuthenticateUser(ImagineBookStore.Core.Models.Input.LoginModel)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IAuthService.AuthenticateUser(ImagineBookStore.Core.Models.Input.LoginModel)"/>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.AuthService.CreateUser(ImagineBookStore.Core.Models.Input.RegisterModel)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IAuthService.CreateUser(ImagineBookStore.Core.Models.Input.RegisterModel)"/>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.AuthService.Logout(System.String)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IAuthService.Logout(System.String)"/>
+        </member>
+        <member name="T:ImagineBookStore.Core.Services.BookService">
+            <summary>
+            Implementation of book-related services.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.BookService.#ctor(ImagineBookStore.Core.Models.App.BookStoreContext,ImagineBookStore.Core.Models.Input.UserSession)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.BookService"/> class.
+            </summary>
+            <param name="context">The database context for book information. See <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext"/>.</param>
+            <param name="userSession">The user session information. See <see cref="T:ImagineBookStore.Core.Models.Input.UserSession"/>.</param>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.BookService.AddBook(ImagineBookStore.Core.Models.Input.BookModel)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IBookService.AddBook(ImagineBookStore.Core.Models.Input.BookModel)"/>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.BookService.DeleteBook(System.Int32)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IBookService.DeleteBook(System.Int32)"/>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.BookService.GetBook(System.Int32)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IBookService.GetBook(System.Int32)"/>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.BookService.ListBooks(ImagineBookStore.Core.Models.Input.PagingOptionModel)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IBookService.ListBooks(ImagineBookStore.Core.Models.Input.PagingOptionModel)"/>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.BookService.UpdateBook(System.Int32,ImagineBookStore.Core.Models.Input.BookModel)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IBookService.UpdateBook(System.Int32,ImagineBookStore.Core.Models.Input.BookModel)"/>
+        </member>
+        <member name="T:ImagineBookStore.Core.Services.CacheService">
+            <summary>
+            Implementation of caching service operations using an app cache.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.CacheService.#ctor(LazyCache.IAppCache)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.CacheService"/> class.
+            </summary>
+            <param name="cache">The app cache implementation used for caching operations.</param>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.CacheService.AddToken(System.String,System.String,System.DateTime)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICacheService.AddToken(System.String,System.String,System.DateTime)"/>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.CacheService.GetToken(System.String)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICacheService.GetToken(System.String)"/>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.CacheService.RemoveToken(System.String)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICacheService.RemoveToken(System.String)"/>
+        </member>
+        <member name="T:ImagineBookStore.Core.Services.CartService">
+            <summary>
+            Implementation of shopping cart service operations.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.CartService.#ctor(ImagineBookStore.Core.Models.App.BookStoreContext,ImagineBookStore.Core.Models.Input.UserSession)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.CartService"/> class.
+            </summary>
+            <param name="context">The database context for shopping cart operations. See <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext"/>.</param>
+            <param name="userSession">The user session information. See <see cref="T:ImagineBookStore.Core.Models.Input.UserSession"/>.</param>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.CartService.AddToCart(ImagineBookStore.Core.Models.Input.CartModel)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICartService.AddToCart(ImagineBookStore.Core.Models.Input.CartModel)"/>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.CartService.ListCarts">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICartService.ListCarts"/>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.CartService.RemoveFromCart(System.Int32)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICartService.RemoveFromCart(System.Int32)"/>
+        </member>
+        <member name="T:ImagineBookStore.Core.Services.OrderService">
+            <summary>
+            Implementation of order-related service operations.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.OrderService.#ctor(ImagineBookStore.Core.Models.App.BookStoreContext,ImagineBookStore.Core.Models.Input.UserSession,System.Net.Http.IHttpClientFactory,Microsoft.Extensions.Options.IOptions{ImagineBookStore.Core.Models.Configurations.PasystackConfig})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.OrderService"/> class.
+            </summary>
+            <param name="context">The database context for order-related operations. See <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext"/>.</param>
+            <param name="userSession">The user session information. See <see cref="T:ImagineBookStore.Core.Models.Input.UserSession"/>.</param>
+            <param name="httpClientFactory">The HTTP Client Factory used for communicating with Paystack API</param>
+            <param name="paystackConfig">Paystack configuration from appsettings.json</param>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.OrderService.AttemptPayment(System.Int32)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IOrderService.AttemptPayment(System.Int32)"/>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.OrderService.ConfirmPayment(System.Int32)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IOrderService.ConfirmPayment(System.Int32)"/>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.OrderService.GetOrderItems(System.Int32)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IOrderService.GetOrderItems(System.Int32)"/>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.OrderService.ListOrders(ImagineBookStore.Core.Models.Input.PagingOptionModel)">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IOrderService.ListOrders(ImagineBookStore.Core.Models.Input.PagingOptionModel)"/>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.OrderService.PlaceOrder">
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IOrderService.PlaceOrder"/>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.OrderService.InitiateTransaction(ImagineBookStore.Core.Models.Paystack.InitiateTransactionModel)">
+            <summary>
+            Initiates a transaction with the payment provider.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.OrderService.VerifyTransaction(System.String)">
+            <summary>
+            Verifies a transaction with the payment provider.
+            </summary>
+        </member>
+        <member name="T:ImagineBookStore.Core.Services.TokenGenerator">
+            <summary>
+            Class responsible for generating and invalidating JWT tokens for user authentication. <see cref="T:ImagineBookStore.Core.Models.App.User"/>
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.TokenGenerator.#ctor(Microsoft.Extensions.Options.IOptions{ImagineBookStore.Core.Models.Configurations.JwtConfig},ImagineBookStore.Core.Interfaces.ICacheService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.TokenGenerator"/> class.
+            </summary>
+            <param name="jwtConfig">The JWT configuration options. See <see cref="T:Microsoft.Extensions.Options.IOptions`1"/>.</param>
+            <param name="cacheService">The cache service for token storage. See <see cref="T:ImagineBookStore.Core.Interfaces.ICacheService"/>.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when either jwtConfig or cacheService is null.</exception>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.TokenGenerator.GenerateJwtToken(ImagineBookStore.Core.Models.App.User)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.TokenGenerator.InvalidateToken(System.String)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Services.TokenGenerator.GenerateAccessToken(ImagineBookStore.Core.Models.App.User,System.DateTime)">
+            <summary>
+            Generates an access token for the specified user with the given expiration time.
+            </summary>
+            <param name="user">The user for whom the token is generated. See <see cref="T:ImagineBookStore.Core.Models.App.User"/>.</param>
+            <param name="expiresAt">The expiration time for the token. See <see cref="T:System.DateTime"/>.</param>
+            <returns>The generated access token as a string.</returns>
+        </member>
+        <member name="T:ImagineBookStore.Core.Utilities.HttpUtilities">
+            <summary>
+            Utility class for HTTP-related operations.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Utilities.HttpUtilities.ToJsonContent(System.Object)">
+            <summary>
+            Converts an object to JSON content for HTTP requests.
+            </summary>
+            <param name="obj">The object to be serialized to JSON content.</param>
+            <returns>An instance of <see cref="T:System.Net.Http.StringContent"/> representing JSON content.</returns>
+        </member>
+        <member name="T:ImagineBookStore.Core.Utilities.PrepDatabase">
+            <summary>
+            Utility class for preparing and populating the database with initial data.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Core.Utilities.PrepDatabase.PrepPopulation(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Prepares and populates the database with initial data.
+            </summary>
+            <param name="app">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> instance.</param>
+        </member>
+        <member name="M:ImagineBookStore.Core.Utilities.PrepDatabase.CreateFirstUserAsync(ImagineBookStore.Core.Interfaces.IAuthService)">
+            <summary>
+            Creates the first user in the system using the provided <see cref="T:ImagineBookStore.Core.Interfaces.IAuthService"/>.
+            </summary>
+            <param name="authService">The <see cref="T:ImagineBookStore.Core.Interfaces.IAuthService"/> instance.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:ImagineBookStore.Core.Utilities.PrepDatabase.SeedData(ImagineBookStore.Core.Models.App.BookStoreContext)">
+            <summary>
+            Seeds the database with initial data, including roles, books, and carts.
+            </summary>
+            <param name="context">The <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext"/> instance.</param>
+        </member>
+        <member name="T:ImagineBookStore.Core.Utilities.StaticErrorMessages">
+            <summary>
+            Static class containing static error messages used across the application.
+            </summary>
+        </member>
+        <member name="F:ImagineBookStore.Core.Utilities.StaticErrorMessages.UnableToSaveChanges">
+            <summary>
+            Error message indicating the inability to save changes.
             </summary>
         </member>
     </members>

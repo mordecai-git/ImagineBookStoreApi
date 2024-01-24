@@ -8,78 +8,11 @@ using Serilog;
 
 namespace ImagineBookStore.Core.Utilities;
 
+/// <summary>
+/// Utility class for preparing and populating the database with initial data.
+/// </summary>
 public static class PrepDatabase
 {
-    public static async void PrepPopulation(IApplicationBuilder app)
-    {
-        using var serviceScope = app.ApplicationServices.CreateScope();
-
-        SeedData(serviceScope.ServiceProvider.GetService<BookStoreContext>());
-
-        await CreateFirstUserAsync(serviceScope.ServiceProvider.GetService<IAuthService>());
-    }
-
-    private static void SeedData(BookStoreContext context)
-    {
-        Log.Information("--> Seeding Role Data...");
-
-        //create default role data
-        if (!context.Roles.Any())
-        {
-            context.Roles.AddRange(
-                new Role { Name = nameof(Roles.Admin) },
-                new Role { Name = nameof(Roles.User) }
-                );
-        }
-
-        // add default books
-        if (!context.Books.Any())
-        {
-            context.Books.AddRange(defaultBooks);
-        }
-
-        // add default cart for default user
-        if (!context.Carts.Any())
-        {
-            context.Carts.AddRange(defaultCarts);
-        }
-
-
-        context.SaveChanges();
-    }
-
-    private static async Task CreateFirstUserAsync(IAuthService authService)
-    {
-        Log.Information("--> Adding First User");
-
-        try
-        {
-            var newUser = new RegisterModel
-            {
-                Email = "jane@doe.com",
-                FirstName = "Jane",
-                LastName = "Doe",
-                Password = "Password1@",
-                ConfirmPassword = "Password1@"
-            };
-
-            var result = await authService.CreateUser(newUser);
-
-            if (result.Success)
-            {
-                Log.Information("--> Added first user successfully. Email: {0}; Password: {1}", newUser.Email, newUser.Password);
-            }
-            else
-            {
-                Log.Error("--> Adding first user failed: {0}", result.Message);
-            }
-        }
-        catch (Exception ex)
-        {
-            Log.Error("--> Adding first user failed", ex);
-        }
-    }
-
     private static readonly List<Book> defaultBooks = new()
     {
         new Book
@@ -297,4 +230,87 @@ public static class PrepDatabase
             Quantity = 5
         }
     };
+
+    /// <summary>
+    /// Prepares and populates the database with initial data.
+    /// </summary>
+    /// <param name="app">The <see cref="IApplicationBuilder"/> instance.</param>
+    public static async void PrepPopulation(IApplicationBuilder app)
+    {
+        using var serviceScope = app.ApplicationServices.CreateScope();
+
+        SeedData(serviceScope.ServiceProvider.GetService<BookStoreContext>());
+
+        await CreateFirstUserAsync(serviceScope.ServiceProvider.GetService<IAuthService>());
+    }
+
+    /// <summary>
+    /// Creates the first user in the system using the provided <see cref="IAuthService"/>.
+    /// </summary>
+    /// <param name="authService">The <see cref="IAuthService"/> instance.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    private static async Task CreateFirstUserAsync(IAuthService authService)
+    {
+        Log.Information("--> Adding First User");
+
+        try
+        {
+            var newUser = new RegisterModel
+            {
+                Email = "jane@doe.com",
+                FirstName = "Jane",
+                LastName = "Doe",
+                Password = "Password1@",
+                ConfirmPassword = "Password1@"
+            };
+
+            var result = await authService.CreateUser(newUser);
+
+            if (result.Success)
+            {
+                Log.Information("--> Added first user successfully. Email: {0}; Password: {1}", newUser.Email, newUser.Password);
+            }
+            else
+            {
+                Log.Error("--> Adding first user failed: {0}", result.Message);
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error("--> Adding first user failed", ex);
+        }
+    }
+
+    /// <summary>
+    /// Seeds the database with initial data, including roles, books, and carts.
+    /// </summary>
+    /// <param name="context">The <see cref="BookStoreContext"/> instance.</param>
+    private static void SeedData(BookStoreContext context)
+    {
+        Log.Information("--> Seeding Role Data...");
+
+        //create default role data
+        if (!context.Roles.Any())
+        {
+            context.Roles.AddRange(
+                new Role { Name = nameof(Roles.Admin) },
+                new Role { Name = nameof(Roles.User) }
+                );
+        }
+
+        // add default books
+        if (!context.Books.Any())
+        {
+            context.Books.AddRange(defaultBooks);
+        }
+
+        // add default cart for default user
+        if (!context.Carts.Any())
+        {
+            context.Carts.AddRange(defaultCarts);
+        }
+
+
+        context.SaveChanges();
+    }
 }

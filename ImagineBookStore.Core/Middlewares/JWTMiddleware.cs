@@ -15,12 +15,21 @@ using System.Text;
 
 namespace ImagineBookStore.Core.Middlewares;
 
+/// <summary>
+/// Middleware for handling JSON Web Token (JWT) authentication.
+/// </summary>
 public class JWTMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly IConfiguration _configuration;
     private readonly ICacheService _cacheService;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="JWTMiddleware"/> class.
+    /// </summary>
+    /// <param name="next">The next middleware in the pipeline.</param>
+    /// <param name="configuration">The configuration instance for accessing application settings.</param>
+    /// <param name="cacheService">The cache service for storing and retrieving tokens.</param>
     public JWTMiddleware(RequestDelegate next, IConfiguration configuration, ICacheService cacheService)
     {
         _next = next;
@@ -28,6 +37,11 @@ public class JWTMiddleware
         _cacheService = cacheService ?? throw new ArgumentNullException(nameof(cacheService));
     }
 
+    /// <summary>
+    /// Invokes the middleware to handle JWT authentication in the request pipeline.
+    /// </summary>
+    /// <param name="context">The HTTP context for the current request.</param>
+    /// <param name="jwtConfig">The configuration options for JWT.</param>
     public async Task Invoke(HttpContext context, IOptions<JwtConfig> jwtConfig)
     {
         var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
@@ -46,6 +60,11 @@ public class JWTMiddleware
         }
     }
 
+    /// <summary>
+    /// Checks if the current route or action is marked as anonymous (skipping JWT authentication).
+    /// </summary>
+    /// <param name="context">The HTTP context for the current request.</param>
+    /// <returns>True if the current route or action is marked as anonymous; otherwise, false.</returns>
     private static bool IsAnonymous(HttpContext context)
     {
         var endpoint = context.GetEndpoint();
@@ -76,6 +95,13 @@ public class JWTMiddleware
         return false;
     }
 
+    /// <summary>
+    /// Validates the JWT token and attaches user information to the HTTP context.
+    /// </summary>
+    /// <param name="context">The HTTP context for the current request.</param>
+    /// <param name="token">The JWT token extracted from the request headers.</param>
+    /// <param name="jwtConfig">The configuration options for JWT.</param>
+    /// <returns>True if JWT validation is successful and the user is attached to the context; otherwise, false.</returns>
     private async Task<bool> AttachAccountToContext(HttpContext context, string token, JwtConfig jwtConfig)
     {
         try

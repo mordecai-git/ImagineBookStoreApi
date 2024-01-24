@@ -1,5 +1,6 @@
 ﻿namespace ImagineBookStore.Core.Models.Configurations;
 
-public class AppConfig
-{
-}
+/// <summary>
+/// A class that represents the AppConfig section of the appsettings.json config.
+/// </summary>
+public class AppConfig { }

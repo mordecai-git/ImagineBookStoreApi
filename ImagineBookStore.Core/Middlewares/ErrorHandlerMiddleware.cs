@@ -6,6 +6,9 @@ using System.Text.Json;
 
 namespace ImagineBookStore.Core.Middlewares;
 
+/// <summary>
+/// Middleware for handling errors and returning appropriate JSON responses.
+/// </summary>
 public class ErrorHandlerMiddleware
 {
     private readonly RequestDelegate _next;
@@ -17,12 +20,21 @@ public class ErrorHandlerMiddleware
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
     };
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ErrorHandlerMiddleware"/> class.
+    /// </summary>
+    /// <param name="next">The next middleware in the pipeline.</param>
+    /// <param name="logger">The logger for capturing error information.</param>
     public ErrorHandlerMiddleware(RequestDelegate next, ILogger<ErrorHandlerMiddleware> logger)
     {
         _next = next ?? throw new ArgumentNullException(nameof(next));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
+    /// <summary>
+    /// Invokes the middleware to handle errors in the request pipeline.
+    /// </summary>
+    /// <param name="context">The HTTP context for the current request.</param>
     public async Task Invoke(HttpContext context)
     {
         try
@@ -76,7 +88,7 @@ public class ErrorHandlerMiddleware
         }
     }
 
-    private TraceInfo GetErrorTraceInfo(Exception ex)
+    private static TraceInfo GetErrorTraceInfo(Exception ex)
     {
         //Get a StackTrace object for the exception
         StackTrace st = new StackTrace(ex, true);
