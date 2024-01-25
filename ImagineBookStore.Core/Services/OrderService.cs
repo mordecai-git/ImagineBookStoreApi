@@ -47,7 +47,7 @@ public class OrderService : IOrderService
             .ProjectToType<PaymentRequestView>()
             .FirstOrDefaultAsync();
 
-        if (paymentData == null) return new ErrorResult("Invalid order.");
+        if (paymentData == null) return new NotFoundErrorResult("Invalid order.");
         if (paymentData.IsPaid) return new ErrorResult("Payment has been completed.");
 
         return new SuccessResult(paymentData);
@@ -61,9 +61,9 @@ public class OrderService : IOrderService
             .Where(x => x.Id == orderId)
             .FirstOrDefaultAsync();
 
-        if (order == null) return new ErrorResult("Invalid order.");
+        if (order == null) return new NotFoundErrorResult("Invalid order.");
 
-        if (order.IsPaid) return new ErrorResult("Order fulfilled.");
+        if (order.IsPaid) return new ErrorResult("Order payment is already completed.");
 
         var verifyTransaction = await VerifyTransaction(order.Reference);
 

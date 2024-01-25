@@ -45,10 +45,10 @@ public class CartService : ICartService
             .FirstOrDefaultAsync();
 
         cart ??= new Cart
-            {
-                UserId = _userSession.UserId,
-                BookId = book.Id
-            };
+        {
+            UserId = _userSession.UserId,
+            BookId = book.Id
+        };
 
         cart.Quantity = model.Quantity;
         cart.UpdatedAt = DateTime.UtcNow;
@@ -84,11 +84,12 @@ public class CartService : ICartService
     {
         var cart = await _context.Carts.FindAsync(cartId);
 
-        if (cart == null) {
-            return new SuccessResult();
-            }
+        if (cart == null)
+        {
+            return new NotFoundErrorResult();
+        }
 
-            _context.Remove(cart);
+        _context.Remove(cart);
         int saved = await _context.SaveChangesAsync();
 
         return saved > 0
