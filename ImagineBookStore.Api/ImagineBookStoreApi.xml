@@ -18,7 +18,7 @@
         </member>
         <member name="M:ImagineBookStore.Api.Controllers.BooksController.#ctor(ImagineBookStore.Core.Interfaces.IBookService)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Api.Controllers.BooksController"/> class.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Api.Controllers.BooksController" /> class.
             </summary>
             <param name="bookService">The book service to be injected.</param>
         </member>
@@ -27,7 +27,7 @@
             Adds a new book to the application.
             </summary>
             <remarks>
-            This endpoint adds a new book to the database, the title must be unique to the author. <br/>
+            This endpoint adds a new book to the database, the title must be unique to the author. <br />
             Requires an Admin role to access this.
             </remarks>
             <param name="model">This represents the book object to be added.</param>
@@ -39,7 +39,7 @@
             Delete a book
             </summary>
             <remarks>
-             Deletes a book with the specified identifier. <br/>
+             Deletes a book with the specified identifier. <br />
             Requires an Admin role to access this.
             </remarks>
             <param name="bookId">The integer identifier of the book to be deleted.</param>
@@ -64,7 +64,7 @@
             <remarks>
             Lists books based on the provided paging options.
             </remarks>
-            <param name="request">The <see cref="T:ImagineBookStore.Core.Models.Input.PagingOptionModel"/> containing the paging options.</param>
+            <param name="request">The <see cref="T:ImagineBookStore.Core.Models.Input.PagingOptionModel" /> containing the paging options.</param>
             <response code="200">Returns the list of books in a paginated format.</response>
         </member>
         <member name="M:ImagineBookStore.Api.Controllers.BooksController.UpdateBook(System.Int32,ImagineBookStore.Core.Models.Input.BookModel)">
@@ -72,7 +72,7 @@
             Update a Book details
             </summary>
             <remarks>
-            Updates details of a book with the specified identifier. <br/>
+            Updates details of a book with the specified identifier. <br />
             Requires an Admin role to access this.
             </remarks>
             <param name="bookId">The identifier of the book to be updated.</param>

@@ -310,7 +310,6 @@ public static class PrepDatabase
             context.Carts.AddRange(defaultCarts);
         }
 
-
         context.SaveChanges();
     }
 }

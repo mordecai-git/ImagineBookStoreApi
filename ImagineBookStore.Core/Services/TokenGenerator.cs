@@ -43,7 +43,7 @@ public class TokenGenerator : ITokenGenerator
 
         // Generate the access token
         var token = GenerateAccessToken(user, expiresAt);
-        
+
         // Cache the token
         _cacheService.AddToken($"{AuthKeys.TokenCacheKey}{user.Uid}", token, expiresAt);
 

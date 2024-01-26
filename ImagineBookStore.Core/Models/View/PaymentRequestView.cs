@@ -33,4 +33,3 @@ public class PaymentRequestView
     [JsonIgnore]
     public bool IsPaid { get; set; }
 }
-
