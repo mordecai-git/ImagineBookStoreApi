@@ -6,16 +6,16 @@
     <members>
         <member name="T:ImagineBookStore.Core.Extensions.CustomResultFactory">
             <summary>
-            Implements an <see cref="T:SharpGrip.FluentValidation.AutoValidation.Mvc.Results.IFluentValidationAutoValidationResultFactory" /> to create custom action results for FluentValidation auto-validation.
+            Implements an <see cref="T:SharpGrip.FluentValidation.AutoValidation.Mvc.Results.IFluentValidationAutoValidationResultFactory"/> to create custom action results for FluentValidation auto-validation.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Extensions.CustomResultFactory.CreateActionResult(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.ValidationProblemDetails)">
             <summary>
-            Creates a custom <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> for FluentValidation auto-validation errors.
+            Creates a custom <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> for FluentValidation auto-validation errors.
             </summary>
             <param name="context">The action executing context.</param>
             <param name="validationProblemDetails">The validation problem details containing validation errors.</param>
-            <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.BadRequestObjectResult" /> with a custom error response containing validation errors of type <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult" />.</returns>
+            <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.BadRequestObjectResult"/> with a custom error response containing validation errors of type <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult"/>.</returns>
         </member>
         <member name="T:ImagineBookStore.Core.Extensions.PaginationExtensions">
             <summary>
@@ -81,10 +81,10 @@
             <summary>
             Configures services for the application, including database, validation, authentication, authorization, HTTP context, caching, and various services.
             </summary>
-            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add services to.</param>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> to add services to.</param>
             <param name="configuration">The configuration for the application.</param>
             <param name="isProduction">A flag indicating whether the application is running in a production environment.</param>
-            <returns>The modified <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> for method chaining.</returns>
+            <returns>The modified <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> for method chaining.</returns>
         </member>
         <member name="T:ImagineBookStore.Core.Interfaces.IAuthService">
             <summary>
@@ -97,21 +97,21 @@
             </summary>
             <param name="model">The registration model containing user details.</param>
             <returns>A task representing the asynchronous operation with the result of the user creation.
-            The result type is <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1" /> where T is <see cref="T:ImagineBookStore.Core.Models.View.AuthDataView" />.</returns>
+            The result type is <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is <see cref="T:ImagineBookStore.Core.Models.View.AuthDataView"/>.</returns>
         </member>
         <member name="M:ImagineBookStore.Core.Interfaces.IAuthService.AuthenticateUser(ImagineBookStore.Core.Models.Input.LoginModel)">
             <summary>
             Authenticates a user with the provided login credentials.
             </summary>
             <param name="model">The login model containing user credentials.</param>
-            <returns>A task with the authentication result: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1" /> where T is <see cref="T:ImagineBookStore.Core.Models.View.AuthDataView" />.</returns>
+            <returns>A task with the authentication result: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is <see cref="T:ImagineBookStore.Core.Models.View.AuthDataView"/>.</returns>
         </member>
         <member name="M:ImagineBookStore.Core.Interfaces.IAuthService.Logout(System.String)">
             <summary>
             Logs out the user with the specified reference.
             </summary>
             <param name="userReference">The reference of the user to log out.</param>
-            <returns>A task with the logout result: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" />.</returns>
+            <returns>A task with the logout result: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/>.</returns>
         </member>
         <member name="T:ImagineBookStore.Core.Interfaces.IBookService">
             <summary>
@@ -123,28 +123,28 @@
             Adds a new book with the provided details.
             </summary>
             <param name="model">The book model containing book details.</param>
-            <returns>A task with the result of the book addition: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1" /> where T is <see cref="T:ImagineBookStore.Core.Models.View.BookView" />.</returns>
+            <returns>A task with the result of the book addition: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is <see cref="T:ImagineBookStore.Core.Models.View.BookView"/>.</returns>
         </member>
         <member name="M:ImagineBookStore.Core.Interfaces.IBookService.DeleteBook(System.Int32)">
             <summary>
             Deletes the book with the specified ID.
             </summary>
             <param name="bookId">The ID of the book to delete.</param>
-            <returns>A task with the result of the book deletion: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" />.</returns>
+            <returns>A task with the result of the book deletion: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/>.</returns>
         </member>
         <member name="M:ImagineBookStore.Core.Interfaces.IBookService.GetBook(System.Int32)">
             <summary>
             Retrieves details of the book with the specified ID.
             </summary>
             <param name="bookId">The ID of the book to retrieve.</param>
-            <returns>A task with the result of retrieving the book details: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1" /> where T is <see cref="T:ImagineBookStore.Core.Models.View.BookView" />.</returns>
+            <returns>A task with the result of retrieving the book details: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is <see cref="T:ImagineBookStore.Core.Models.View.BookView"/>.</returns>
         </member>
         <member name="M:ImagineBookStore.Core.Interfaces.IBookService.ListBooks(ImagineBookStore.Core.Models.Input.PagingOptionModel)">
             <summary>
             Lists books based on the provided paging options.
             </summary>
             <param name="request">The paging options for listing books.</param>
-            <returns>A task with the result of listing books: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1" /> where T is a list of <see cref="T:ImagineBookStore.Core.Models.View.BookView" />.</returns>
+            <returns>A task with the result of listing books: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is a list of <see cref="T:ImagineBookStore.Core.Models.View.BookView"/>.</returns>
         </member>
         <member name="M:ImagineBookStore.Core.Interfaces.IBookService.UpdateBook(System.Int32,ImagineBookStore.Core.Models.Input.BookModel)">
             <summary>
@@ -152,7 +152,7 @@
             </summary>
             <param name="bookId">The ID of the book to update.</param>
             <param name="model">The book model containing updated details.</param>
-            <returns>A task with the result of updating the book: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1" /> where T is <see cref="T:ImagineBookStore.Core.Models.View.BookView" />.</returns>
+            <returns>A task with the result of updating the book: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is <see cref="T:ImagineBookStore.Core.Models.View.BookView"/>.</returns>
         </member>
         <member name="T:ImagineBookStore.Core.Interfaces.ICacheService">
             <summary>
@@ -190,20 +190,20 @@
             Adds a book to the user's shopping cart.
             </summary>
             <param name="model">The cart model containing information about the book and quantity to add.</param>
-            <returns>A task with the result of adding the book to the cart: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" />.</returns>
+            <returns>A task with the result of adding the book to the cart: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/>.</returns>
         </member>
         <member name="M:ImagineBookStore.Core.Interfaces.ICartService.ListCarts">
             <summary>
             Lists the items in the user's shopping cart.
             </summary>
-            <returns>A task with the result of listing the items in the cart: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1" /> where T is <see cref="T:ImagineBookStore.Core.Models.View.CartView" />.</returns>
+            <returns>A task with the result of listing the items in the cart: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is <see cref="T:ImagineBookStore.Core.Models.View.CartView"/>.</returns>
         </member>
         <member name="M:ImagineBookStore.Core.Interfaces.ICartService.RemoveFromCart(System.Int32)">
             <summary>
             Removes a book from the user's shopping cart.
             </summary>
             <param name="cartId">The ID of the cart item to remove.</param>
-            <returns>A task with the result of removing the book from the cart: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" />.</returns>
+            <returns>A task with the result of removing the book from the cart: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/>.</returns>
         </member>
         <member name="T:ImagineBookStore.Core.Interfaces.IOrderService">
             <summary>
@@ -215,34 +215,34 @@
             Attempts to process payment for the specified order.
             </summary>
             <param name="orderId">The ID of the order to attempt payment for.</param>
-            <returns>A task with the result of the payment attempt: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" /> where T is <see cref="T:ImagineBookStore.Core.Models.View.PaymentRequestView" />.</returns>
+            <returns>A task with the result of the payment attempt: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> where T is <see cref="T:ImagineBookStore.Core.Models.View.PaymentRequestView"/>.</returns>
         </member>
         <member name="M:ImagineBookStore.Core.Interfaces.IOrderService.ConfirmPayment(System.Int32)">
             <summary>
             Confirms payment for the specified order.
             </summary>
             <param name="orderId">The ID of the order to confirm payment for.</param>
-            <returns>A task with the result of confirming the payment: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" />.</returns>
+            <returns>A task with the result of confirming the payment: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/>.</returns>
         </member>
         <member name="M:ImagineBookStore.Core.Interfaces.IOrderService.GetOrderItems(System.Int32)">
             <summary>
             Gets the items of the specified order.
             </summary>
             <param name="orderId">The ID of the order to retrieve items for.</param>
-            <returns>The result containing the order items: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1" /> where T is a list of <see cref="T:ImagineBookStore.Core.Models.View.OrderItemView" />.</returns>
+            <returns>The result containing the order items: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is a list of <see cref="T:ImagineBookStore.Core.Models.View.OrderItemView"/>.</returns>
         </member>
         <member name="M:ImagineBookStore.Core.Interfaces.IOrderService.ListOrders(ImagineBookStore.Core.Models.Input.PagingOptionModel)">
             <summary>
             Lists orders based on the provided paging options.
             </summary>
             <param name="request">The paging options for listing orders.</param>
-            <returns>A task with the result of listing orders: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1" /> where T is a list of <see cref="T:ImagineBookStore.Core.Models.View.OrderView" />.</returns>
+            <returns>A task with the result of listing orders: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is a list of <see cref="T:ImagineBookStore.Core.Models.View.OrderView"/>.</returns>
         </member>
         <member name="M:ImagineBookStore.Core.Interfaces.IOrderService.PlaceOrder">
             <summary>
             Places a new order based on the items in the user's shopping cart.
             </summary>
-            <returns>A task with the result of placing the order: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1" /> where T is <see cref="T:ImagineBookStore.Core.Models.View.PaymentRequestView" />.</returns>
+            <returns>A task with the result of placing the order: <see cref="T:ImagineBookStore.Core.Models.Utilities.Result`1"/> where T is <see cref="T:ImagineBookStore.Core.Models.View.PaymentRequestView"/>.</returns>
         </member>
         <member name="T:ImagineBookStore.Core.Interfaces.IPagedList">
             <summary>
@@ -295,7 +295,7 @@
             <summary>
             Invalidates the JWT token for the specified user reference.
             </summary>
-            <param name="userReference">The user reference for whom the token should be invalidated. See <see cref="T:System.String" />.</param>
+            <param name="userReference">The user reference for whom the token should be invalidated. See <see cref="T:System.String"/>.</param>
             <returns>A task representing the asynchronous operation.</returns>
         </member>
         <member name="T:ImagineBookStore.Core.Middlewares.ErrorHandlerMiddleware">
@@ -305,7 +305,7 @@
         </member>
         <member name="M:ImagineBookStore.Core.Middlewares.ErrorHandlerMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{ImagineBookStore.Core.Middlewares.ErrorHandlerMiddleware})">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Middlewares.ErrorHandlerMiddleware" /> class.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Middlewares.ErrorHandlerMiddleware"/> class.
             </summary>
             <param name="next">The next middleware in the pipeline.</param>
             <param name="logger">The logger for capturing error information.</param>
@@ -323,7 +323,7 @@
         </member>
         <member name="M:ImagineBookStore.Core.Middlewares.JWTMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Configuration.IConfiguration,ImagineBookStore.Core.Interfaces.ICacheService)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Middlewares.JWTMiddleware" /> class.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Middlewares.JWTMiddleware"/> class.
             </summary>
             <param name="next">The next middleware in the pipeline.</param>
             <param name="configuration">The configuration instance for accessing application settings.</param>
@@ -359,7 +359,7 @@
         </member>
         <member name="M:ImagineBookStore.Core.Middlewares.UserSessionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Middlewares.UserSessionMiddleware" /> class.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Middlewares.UserSessionMiddleware"/> class.
             </summary>
             <param name="next">The next middleware in the pipeline.</param>
         </member>
@@ -443,12 +443,12 @@
         </member>
         <member name="M:ImagineBookStore.Core.Models.App.BookStoreContext.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext" /> class.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext"/> class.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.App.BookStoreContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ImagineBookStore.Core.Models.App.BookStoreContext})">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext" /> class with the specified options.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext"/> class with the specified options.
             </summary>
             <param name="options">The options to be used by the context.</param>
         </member>
@@ -785,12 +785,12 @@
         </member>
         <member name="T:ImagineBookStore.Core.Models.Input.BookModelValidator">
             <summary>
-            Validator for the <see cref="T:ImagineBookStore.Core.Models.Input.BookModel" /> class.
+            Validator for the <see cref="T:ImagineBookStore.Core.Models.Input.BookModel"/> class.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Input.BookModelValidator.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Input.BookModelValidator" /> class.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Input.BookModelValidator"/> class.
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Input.CartModel">
@@ -810,13 +810,13 @@
         </member>
         <member name="T:ImagineBookStore.Core.Models.Input.CartModelValidator">
             <summary>
-            Validator for the <see cref="T:ImagineBookStore.Core.Models.Input.CartModel" /> class.
+            Validator for the <see cref="T:ImagineBookStore.Core.Models.Input.CartModel"/> class.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Input.CartModelValidator.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Input.CartModelValidator" /> class.
-            Defines validation rules for the <see cref="T:ImagineBookStore.Core.Models.Input.CartModel" />.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Input.CartModelValidator"/> class.
+            Defines validation rules for the <see cref="T:ImagineBookStore.Core.Models.Input.CartModel"/>.
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Input.LoginModel">
@@ -836,12 +836,12 @@
         </member>
         <member name="T:ImagineBookStore.Core.Models.Input.LoginModelValidation">
             <summary>
-            Validator for the <see cref="T:ImagineBookStore.Core.Models.Input.LoginModel" /> class.
+            Validator for the <see cref="T:ImagineBookStore.Core.Models.Input.LoginModel"/> class.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Input.LoginModelValidation.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Input.LoginModelValidation" /> class.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Input.LoginModelValidation"/> class.
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Input.PagingOptionModel">
@@ -891,13 +891,13 @@
         </member>
         <member name="T:ImagineBookStore.Core.Models.Input.RegisterModelValidation">
             <summary>
-            Represents the validation rules for the <see cref="T:ImagineBookStore.Core.Models.Input.RegisterModel" />.
+            Represents the validation rules for the <see cref="T:ImagineBookStore.Core.Models.Input.RegisterModel"/>.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Input.RegisterModelValidation.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Input.RegisterModelValidation" /> class.
-            Defines validation rules for the <see cref="T:ImagineBookStore.Core.Models.Input.RegisterModel" />.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Input.RegisterModelValidation"/> class.
+            Defines validation rules for the <see cref="T:ImagineBookStore.Core.Models.Input.RegisterModel"/>.
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Input.UserSession">
@@ -998,17 +998,17 @@
         </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.BadErrorResult">
             <summary>
-            Represents an error result, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" /> class.
+            Represents an error result, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> class.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.BadErrorResult.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.BadErrorResult" /> class with a default failure status.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.BadErrorResult"/> class with a default failure status.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.BadErrorResult.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.BadErrorResult" /> class with a specified error message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.BadErrorResult"/> class with a specified error message.
             </summary>
             <param name="message">The error message associated with the result.</param>
         </member>
@@ -1029,12 +1029,12 @@
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.BadErrorResult.Content">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.BadErrorResult.Paging">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.BadErrorResult`1">
@@ -1044,12 +1044,12 @@
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.BadErrorResult`1.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.BadErrorResult" /> class with a default failure status.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.BadErrorResult"/> class with a default failure status.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.BadErrorResult`1.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.BadErrorResult" /> class with a specified error message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.BadErrorResult"/> class with a specified error message.
             </summary>
             <param name="message">The error message associated with the result.</param>
         </member>
@@ -1070,47 +1070,47 @@
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.BadErrorResult`1.Content">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.BadErrorResult`1.Paging">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.ErrorResult">
             <summary>
-            Represents an error result, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" /> class.
+            Represents an error result, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> class.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.ErrorResult.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult" /> class with a default failure status.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult"/> class with a default failure status.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.ErrorResult.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult" /> class with a specified error message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult"/> class with a specified error message.
             </summary>
             <param name="message">The error message associated with the result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.ErrorResult.#ctor(System.Int32,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult" /> class with a specified status code and error message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult"/> class with a specified status code and error message.
             </summary>
             <param name="status">The HTTP status code of the error result.</param>
             <param name="message">The error message associated with the result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.ErrorResult.#ctor(System.String,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult" /> class with a specified title and error message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult"/> class with a specified title and error message.
             </summary>
             <param name="title">The title associated with the error result.</param>
             <param name="message">The error message associated with the result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.ErrorResult.#ctor(System.Int32,System.String,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult" /> class with a specified status code, title, and error message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult"/> class with a specified status code, title, and error message.
             </summary>
             <param name="status">The HTTP status code of the error result.</param>
             <param name="title">The title associated with the error result.</param>
@@ -1133,12 +1133,12 @@
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.ErrorResult.Content">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.ErrorResult.Paging">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.ErrorResult`1">
@@ -1148,32 +1148,32 @@
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.ErrorResult`1.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult" /> class with a default failure status.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult"/> class with a default failure status.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.ErrorResult`1.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult" /> class with a specified error message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult"/> class with a specified error message.
             </summary>
             <param name="message">The error message associated with the result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.ErrorResult`1.#ctor(System.Int32,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult" /> class with a specified status code and error message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult"/> class with a specified status code and error message.
             </summary>
             <param name="status">The HTTP status code of the error result.</param>
             <param name="message">The error message associated with the result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.ErrorResult`1.#ctor(System.String,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult" /> class with a specified title and error message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult"/> class with a specified title and error message.
             </summary>
             <param name="title">The title associated with the error result.</param>
             <param name="message">The error message associated with the result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.ErrorResult`1.#ctor(System.Int32,System.String,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult" /> class with a specified status code, title, and error message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.ErrorResult"/> class with a specified status code, title, and error message.
             </summary>
             <param name="status">The HTTP status code of the error result.</param>
             <param name="title">The title associated with the error result.</param>
@@ -1196,63 +1196,63 @@
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.ErrorResult`1.Content">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.ErrorResult`1.Paging">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult">
             <summary>
-            Represents a Not found error result, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" /> class.
+            Represents a Not found error result, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> class.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult" /> class with a default failure status.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult"/> class with a default failure status.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult" /> class with a specified error message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult"/> class with a specified error message.
             </summary>
             <param name="message">The error message associated with the result.</param>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.Detail">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.Instance">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.Path">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.TraceInfo">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.ValidationErrors">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.Content">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult.Paging">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1">
@@ -1262,48 +1262,48 @@
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult" /> class with a default failure status.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult"/> class with a default failure status.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult" /> class with a specified error message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult"/> class with a specified error message.
             </summary>
             <param name="message">The error message associated with the result.</param>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.Detail">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.Instance">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.Path">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.TraceInfo">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.ValidationErrors">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.Content">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.NotFoundErrorResult`1.Paging">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.PagedList`1">
@@ -1354,106 +1354,106 @@
         </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult">
             <summary>
-            Represents a successful result, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" /> class.
+            Represents a successful result, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> class.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult" /> class with a default success status.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult"/> class with a default success status.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult.#ctor(System.Object)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult" /> class with a specified content.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult"/> class with a specified content.
             </summary>
             <param name="content">The content associated with the successful result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult" /> class with a specified title.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult"/> class with a specified title.
             </summary>
             <param name="message">The message associated with the successful result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult.#ctor(System.String,System.Object)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult" /> class with specified content and message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult"/> class with specified content and message.
             </summary>
             <param name="content">The content associated with the successful result.</param>
             <param name="message">The message associated with the successful result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult.#ctor(System.Int32,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult" /> class with a specified status code and title.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult"/> class with a specified status code and title.
             </summary>
             <param name="status">The HTTP status code of the success result.</param>
             <param name="message">The additional message associated with the success result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult.#ctor(System.Int32,System.Object)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult" /> class with a specified status code, title, and message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult"/> class with a specified status code, title, and message.
             </summary>
             <param name="status">The HTTP status code of the success result.</param>
             <param name="content">The content associated with the successful result.</param>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult.Detail">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult.Instance">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult.Path">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult.TraceInfo">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult.ValidationErrors">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1">
             <summary>
-            Represents a generic successful result with content, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" /> class.
+            Represents a generic successful result with content, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> class.
             </summary>
             <typeparam name="T">The type of the content.</typeparam>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1" /> class with a default success status.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1"/> class with a default success status.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.#ctor(`0)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1" /> class with specified content.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1"/> class with specified content.
             </summary>
             <param name="content">The content associated with the success result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.#ctor(System.Int32,`0)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1" /> class with a specified status and content.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1"/> class with a specified status and content.
             </summary>
             <param name="status">The HTTP status code of the success result.</param>
             <param name="content">The content associated with the success result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.#ctor(System.String,`0)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1" /> class with a specified title and content.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1"/> class with a specified title and content.
             </summary>
             <param name="message">The additional message associated with the success result.</param>
             <param name="content">The content associated with the success result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.#ctor(System.Int32,System.String,`0)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1" /> class with specified status code, title, and content.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1"/> class with specified status code, title, and content.
             </summary>
             <param name="status">The HTTP status code of the success result.</param>
             <param name="message">The additional message associated with the success result.</param>
@@ -1461,27 +1461,27 @@
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.Detail">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.Instance">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.Path">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.TraceInfo">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.PagedSuccessResult`1.ValidationErrors">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.Paging">
@@ -1527,18 +1527,18 @@
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.Result`1.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" /> class.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> class.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.Result`1.#ctor(System.Boolean)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" /> class with a specified success status.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> class with a specified success status.
             </summary>
             <param name="success">A value indicating whether the operation was successful.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.Result`1.#ctor(System.Boolean,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" /> class with a specified success status and message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> class with a specified success status and message.
             </summary>
             <param name="success">A value indicating whether the operation was successful.</param>
             <param name="message">The additional message associated with the result.</param>
@@ -1611,124 +1611,124 @@
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.Result.#ctor(System.Boolean)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" /> class with a specified success status.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> class with a specified success status.
             </summary>
             <param name="success">A value indicating whether the operation was successful.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.Result.#ctor(System.Boolean,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" /> class with a specified success status and message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> class with a specified success status and message.
             </summary>
             <param name="success">A value indicating whether the operation was successful.</param>
             <param name="message">The additional message associated with the result.</param>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.SuccessResult">
             <summary>
-            Represents a successful result, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" /> class.
+            Represents a successful result, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> class.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.SuccessResult.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult" /> class with a default success status.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult"/> class with a default success status.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.SuccessResult.#ctor(System.Object)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult" /> class with a specified content.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult"/> class with a specified content.
             </summary>
             <param name="content">The content associated with the successful result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.SuccessResult.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult" /> class with a specified title.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult"/> class with a specified title.
             </summary>
             <param name="message">The message associated with the successful result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.SuccessResult.#ctor(System.String,System.Object)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult" /> class with specified content and message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult"/> class with specified content and message.
             </summary>
             <param name="content">The content associated with the successful result.</param>
             <param name="message">The message associated with the successful result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.SuccessResult.#ctor(System.Int32,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult" /> class with a specified status code and title.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult"/> class with a specified status code and title.
             </summary>
             <param name="status">The HTTP status code of the success result.</param>
             <param name="message">The additional message associated with the success result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.SuccessResult.#ctor(System.Int32,System.Object)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult" /> class with a specified status code, title, and message.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult"/> class with a specified status code, title, and message.
             </summary>
             <param name="status">The HTTP status code of the success result.</param>
             <param name="content">The content associated with the successful result.</param>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult.Paging">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult.Detail">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult.Instance">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult.Path">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult.TraceInfo">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult.ValidationErrors">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.SuccessResult`1">
             <summary>
-            Represents a generic successful result with content, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result" /> class.
+            Represents a generic successful result with content, derived from the <see cref="T:ImagineBookStore.Core.Models.Utilities.Result"/> class.
             </summary>
             <typeparam name="T">The type of the content.</typeparam>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.SuccessResult`1.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult`1" /> class with a default success status.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult`1"/> class with a default success status.
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.SuccessResult`1.#ctor(`0)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult`1" /> class with specified content.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult`1"/> class with specified content.
             </summary>
             <param name="content">The content associated with the success result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.SuccessResult`1.#ctor(System.Int32,`0)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult`1" /> class with a specified status and content.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult`1"/> class with a specified status and content.
             </summary>
             <param name="status">The HTTP status code of the success result.</param>
             <param name="content">The content associated with the success result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.SuccessResult`1.#ctor(System.String,`0)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult`1" /> class with a specified title and content.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult`1"/> class with a specified title and content.
             </summary>
             <param name="message">The additional message associated with the success result.</param>
             <param name="content">The content associated with the success result.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Models.Utilities.SuccessResult`1.#ctor(System.Int32,System.String,`0)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult`1" /> class with specified status code, title, and content.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Models.Utilities.SuccessResult`1"/> class with specified status code, title, and content.
             </summary>
             <param name="status">The HTTP status code of the success result.</param>
             <param name="message">The additional message associated with the success result.</param>
@@ -1736,32 +1736,32 @@
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult`1.Paging">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult`1.Detail">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult`1.Instance">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult`1.Path">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult`1.TraceInfo">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="P:ImagineBookStore.Core.Models.Utilities.SuccessResult`1.ValidationErrors">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="T:ImagineBookStore.Core.Models.Utilities.TraceInfo">
@@ -2041,19 +2041,19 @@
         </member>
         <member name="M:ImagineBookStore.Core.Services.AuthService.#ctor(ImagineBookStore.Core.Models.App.BookStoreContext,ImagineBookStore.Core.Interfaces.ITokenGenerator)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.AuthService" /> class.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.AuthService"/> class.
             </summary>
-            <param name="context">The database context for user information. See <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext" />.</param>
-            <param name="tokenGenerator">The token generator for creating and invalidating user tokens. See <see cref="T:ImagineBookStore.Core.Interfaces.ITokenGenerator" />.</param>
+            <param name="context">The database context for user information. See <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext"/>.</param>
+            <param name="tokenGenerator">The token generator for creating and invalidating user tokens. See <see cref="T:ImagineBookStore.Core.Interfaces.ITokenGenerator"/>.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Services.AuthService.AuthenticateUser(ImagineBookStore.Core.Models.Input.LoginModel)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IAuthService.AuthenticateUser(ImagineBookStore.Core.Models.Input.LoginModel)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IAuthService.AuthenticateUser(ImagineBookStore.Core.Models.Input.LoginModel)"/>
         </member>
         <member name="M:ImagineBookStore.Core.Services.AuthService.CreateUser(ImagineBookStore.Core.Models.Input.RegisterModel)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IAuthService.CreateUser(ImagineBookStore.Core.Models.Input.RegisterModel)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IAuthService.CreateUser(ImagineBookStore.Core.Models.Input.RegisterModel)"/>
         </member>
         <member name="M:ImagineBookStore.Core.Services.AuthService.Logout(System.String)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IAuthService.Logout(System.String)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IAuthService.Logout(System.String)"/>
         </member>
         <member name="T:ImagineBookStore.Core.Services.BookService">
             <summary>
@@ -2062,25 +2062,25 @@
         </member>
         <member name="M:ImagineBookStore.Core.Services.BookService.#ctor(ImagineBookStore.Core.Models.App.BookStoreContext,ImagineBookStore.Core.Models.Input.UserSession)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.BookService" /> class.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.BookService"/> class.
             </summary>
-            <param name="context">The database context for book information. See <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext" />.</param>
-            <param name="userSession">The user session information. See <see cref="T:ImagineBookStore.Core.Models.Input.UserSession" />.</param>
+            <param name="context">The database context for book information. See <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext"/>.</param>
+            <param name="userSession">The user session information. See <see cref="T:ImagineBookStore.Core.Models.Input.UserSession"/>.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Services.BookService.AddBook(ImagineBookStore.Core.Models.Input.BookModel)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IBookService.AddBook(ImagineBookStore.Core.Models.Input.BookModel)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IBookService.AddBook(ImagineBookStore.Core.Models.Input.BookModel)"/>
         </member>
         <member name="M:ImagineBookStore.Core.Services.BookService.DeleteBook(System.Int32)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IBookService.DeleteBook(System.Int32)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IBookService.DeleteBook(System.Int32)"/>
         </member>
         <member name="M:ImagineBookStore.Core.Services.BookService.GetBook(System.Int32)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IBookService.GetBook(System.Int32)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IBookService.GetBook(System.Int32)"/>
         </member>
         <member name="M:ImagineBookStore.Core.Services.BookService.ListBooks(ImagineBookStore.Core.Models.Input.PagingOptionModel)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IBookService.ListBooks(ImagineBookStore.Core.Models.Input.PagingOptionModel)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IBookService.ListBooks(ImagineBookStore.Core.Models.Input.PagingOptionModel)"/>
         </member>
         <member name="M:ImagineBookStore.Core.Services.BookService.UpdateBook(System.Int32,ImagineBookStore.Core.Models.Input.BookModel)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IBookService.UpdateBook(System.Int32,ImagineBookStore.Core.Models.Input.BookModel)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IBookService.UpdateBook(System.Int32,ImagineBookStore.Core.Models.Input.BookModel)"/>
         </member>
         <member name="T:ImagineBookStore.Core.Services.CacheService">
             <summary>
@@ -2089,18 +2089,18 @@
         </member>
         <member name="M:ImagineBookStore.Core.Services.CacheService.#ctor(LazyCache.IAppCache)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.CacheService" /> class.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.CacheService"/> class.
             </summary>
             <param name="cache">The app cache implementation used for caching operations.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Services.CacheService.AddToken(System.String,System.String,System.DateTime)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICacheService.AddToken(System.String,System.String,System.DateTime)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICacheService.AddToken(System.String,System.String,System.DateTime)"/>
         </member>
         <member name="M:ImagineBookStore.Core.Services.CacheService.GetToken(System.String)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICacheService.GetToken(System.String)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICacheService.GetToken(System.String)"/>
         </member>
         <member name="M:ImagineBookStore.Core.Services.CacheService.RemoveToken(System.String)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICacheService.RemoveToken(System.String)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICacheService.RemoveToken(System.String)"/>
         </member>
         <member name="T:ImagineBookStore.Core.Services.CartService">
             <summary>
@@ -2109,19 +2109,19 @@
         </member>
         <member name="M:ImagineBookStore.Core.Services.CartService.#ctor(ImagineBookStore.Core.Models.App.BookStoreContext,ImagineBookStore.Core.Models.Input.UserSession)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.CartService" /> class.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.CartService"/> class.
             </summary>
-            <param name="context">The database context for shopping cart operations. See <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext" />.</param>
-            <param name="userSession">The user session information. See <see cref="T:ImagineBookStore.Core.Models.Input.UserSession" />.</param>
+            <param name="context">The database context for shopping cart operations. See <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext"/>.</param>
+            <param name="userSession">The user session information. See <see cref="T:ImagineBookStore.Core.Models.Input.UserSession"/>.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Services.CartService.AddToCart(ImagineBookStore.Core.Models.Input.CartModel)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICartService.AddToCart(ImagineBookStore.Core.Models.Input.CartModel)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICartService.AddToCart(ImagineBookStore.Core.Models.Input.CartModel)"/>
         </member>
         <member name="M:ImagineBookStore.Core.Services.CartService.ListCarts">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICartService.ListCarts" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICartService.ListCarts"/>
         </member>
         <member name="M:ImagineBookStore.Core.Services.CartService.RemoveFromCart(System.Int32)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICartService.RemoveFromCart(System.Int32)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.ICartService.RemoveFromCart(System.Int32)"/>
         </member>
         <member name="T:ImagineBookStore.Core.Services.OrderService">
             <summary>
@@ -2130,27 +2130,27 @@
         </member>
         <member name="M:ImagineBookStore.Core.Services.OrderService.#ctor(ImagineBookStore.Core.Models.App.BookStoreContext,ImagineBookStore.Core.Models.Input.UserSession,System.Net.Http.IHttpClientFactory,Microsoft.Extensions.Options.IOptions{ImagineBookStore.Core.Models.Configurations.PasystackConfig})">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.OrderService" /> class.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.OrderService"/> class.
             </summary>
-            <param name="context">The database context for order-related operations. See <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext" />.</param>
-            <param name="userSession">The user session information. See <see cref="T:ImagineBookStore.Core.Models.Input.UserSession" />.</param>
+            <param name="context">The database context for order-related operations. See <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext"/>.</param>
+            <param name="userSession">The user session information. See <see cref="T:ImagineBookStore.Core.Models.Input.UserSession"/>.</param>
             <param name="httpClientFactory">The HTTP Client Factory used for communicating with Paystack API</param>
             <param name="paystackConfig">Paystack configuration from appsettings.json</param>
         </member>
         <member name="M:ImagineBookStore.Core.Services.OrderService.AttemptPayment(System.Int32)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IOrderService.AttemptPayment(System.Int32)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IOrderService.AttemptPayment(System.Int32)"/>
         </member>
         <member name="M:ImagineBookStore.Core.Services.OrderService.ConfirmPayment(System.Int32)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IOrderService.ConfirmPayment(System.Int32)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IOrderService.ConfirmPayment(System.Int32)"/>
         </member>
         <member name="M:ImagineBookStore.Core.Services.OrderService.GetOrderItems(System.Int32)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IOrderService.GetOrderItems(System.Int32)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IOrderService.GetOrderItems(System.Int32)"/>
         </member>
         <member name="M:ImagineBookStore.Core.Services.OrderService.ListOrders(ImagineBookStore.Core.Models.Input.PagingOptionModel)">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IOrderService.ListOrders(ImagineBookStore.Core.Models.Input.PagingOptionModel)" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IOrderService.ListOrders(ImagineBookStore.Core.Models.Input.PagingOptionModel)"/>
         </member>
         <member name="M:ImagineBookStore.Core.Services.OrderService.PlaceOrder">
-            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IOrderService.PlaceOrder" />
+            <inheritdoc cref="M:ImagineBookStore.Core.Interfaces.IOrderService.PlaceOrder"/>
         </member>
         <member name="M:ImagineBookStore.Core.Services.OrderService.InitiateTransaction(ImagineBookStore.Core.Models.Paystack.InitiateTransactionModel)">
             <summary>
@@ -2164,33 +2164,33 @@
         </member>
         <member name="T:ImagineBookStore.Core.Services.TokenGenerator">
             <summary>
-            Class responsible for generating and invalidating JWT tokens for user authentication. <see cref="T:ImagineBookStore.Core.Models.App.User" />
+            Class responsible for generating and invalidating JWT tokens for user authentication. <see cref="T:ImagineBookStore.Core.Models.App.User"/>
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Services.TokenGenerator.#ctor(Microsoft.Extensions.Options.IOptions{ImagineBookStore.Core.Models.Configurations.JwtConfig},ImagineBookStore.Core.Interfaces.ICacheService)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.TokenGenerator" /> class.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Core.Services.TokenGenerator"/> class.
             </summary>
-            <param name="jwtConfig">The JWT configuration options. See <see cref="T:Microsoft.Extensions.Options.IOptions`1" />.</param>
-            <param name="cacheService">The cache service for token storage. See <see cref="T:ImagineBookStore.Core.Interfaces.ICacheService" />.</param>
+            <param name="jwtConfig">The JWT configuration options. See <see cref="T:Microsoft.Extensions.Options.IOptions`1"/>.</param>
+            <param name="cacheService">The cache service for token storage. See <see cref="T:ImagineBookStore.Core.Interfaces.ICacheService"/>.</param>
             <exception cref="T:System.ArgumentNullException">Thrown when either jwtConfig or cacheService is null.</exception>
         </member>
         <member name="M:ImagineBookStore.Core.Services.TokenGenerator.GenerateJwtToken(ImagineBookStore.Core.Models.App.User)">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Services.TokenGenerator.InvalidateToken(System.String)">
             <summary>
-            <inheritdoc />
+            <inheritdoc/>
             </summary>
         </member>
         <member name="M:ImagineBookStore.Core.Services.TokenGenerator.GenerateAccessToken(ImagineBookStore.Core.Models.App.User,System.DateTime)">
             <summary>
             Generates an access token for the specified user with the given expiration time.
             </summary>
-            <param name="user">The user for whom the token is generated. See <see cref="T:ImagineBookStore.Core.Models.App.User" />.</param>
-            <param name="expiresAt">The expiration time for the token. See <see cref="T:System.DateTime" />.</param>
+            <param name="user">The user for whom the token is generated. See <see cref="T:ImagineBookStore.Core.Models.App.User"/>.</param>
+            <param name="expiresAt">The expiration time for the token. See <see cref="T:System.DateTime"/>.</param>
             <returns>The generated access token as a string.</returns>
         </member>
         <member name="T:ImagineBookStore.Core.Utilities.HttpUtilities">
@@ -2203,7 +2203,7 @@
             Converts an object to JSON content for HTTP requests.
             </summary>
             <param name="obj">The object to be serialized to JSON content.</param>
-            <returns>An instance of <see cref="T:System.Net.Http.StringContent" /> representing JSON content.</returns>
+            <returns>An instance of <see cref="T:System.Net.Http.StringContent"/> representing JSON content.</returns>
         </member>
         <member name="T:ImagineBookStore.Core.Utilities.PrepDatabase">
             <summary>
@@ -2214,20 +2214,20 @@
             <summary>
             Prepares and populates the database with initial data.
             </summary>
-            <param name="app">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" /> instance.</param>
+            <param name="app">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> instance.</param>
         </member>
         <member name="M:ImagineBookStore.Core.Utilities.PrepDatabase.CreateFirstUserAsync(ImagineBookStore.Core.Interfaces.IAuthService)">
             <summary>
-            Creates the first user in the system using the provided <see cref="T:ImagineBookStore.Core.Interfaces.IAuthService" />.
+            Creates the first user in the system using the provided <see cref="T:ImagineBookStore.Core.Interfaces.IAuthService"/>.
             </summary>
-            <param name="authService">The <see cref="T:ImagineBookStore.Core.Interfaces.IAuthService" /> instance.</param>
+            <param name="authService">The <see cref="T:ImagineBookStore.Core.Interfaces.IAuthService"/> instance.</param>
             <returns>A task representing the asynchronous operation.</returns>
         </member>
         <member name="M:ImagineBookStore.Core.Utilities.PrepDatabase.SeedData(ImagineBookStore.Core.Models.App.BookStoreContext)">
             <summary>
             Seeds the database with initial data, including roles, books, and carts.
             </summary>
-            <param name="context">The <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext" /> instance.</param>
+            <param name="context">The <see cref="T:ImagineBookStore.Core.Models.App.BookStoreContext"/> instance.</param>
         </member>
         <member name="T:ImagineBookStore.Core.Utilities.StaticErrorMessages">
             <summary>

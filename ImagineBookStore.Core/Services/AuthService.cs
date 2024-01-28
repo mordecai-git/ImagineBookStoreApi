@@ -5,6 +5,7 @@ using ImagineBookStore.Core.Models.Utilities;
 using ImagineBookStore.Core.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace ImagineBookStore.Core.Services;
 
@@ -84,5 +85,34 @@ public class AuthService : IAuthService
     {
         await _tokenGenerator.InvalidateToken(userReference);
         return new SuccessResult();
+    }
+
+    public async Taks<Result> AddUserToRole(Guid uid, string roleName)
+    {
+        var role = await _context.Roles.FirstOrDefaultAsync(r => r.Name == roleName);
+        if (role == null) return new BadErrorResult("Invalid role provided.");
+
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Uid == uid);
+        if (user == null) return new BadErrorResult("Invalid user provided.");
+
+        var userRole = await _context.UserRoles
+            .Where(ur => ur.RoleId == role.Id && ur.UserId == user.Id)
+            .FirstOrDefaultAsync();
+
+        if (userRole != null) return new SuccessResult();
+
+        userRole = new()
+        {
+            RoleId = role.Id,
+            UserId = user.Id
+        };
+
+        await _context.AddAsync(userRole);
+
+        int saved = await _context.SaveChangesAsync();
+
+        return saved > 0
+            ? new SuccessResult()
+            : new ErrorResult("Unabe to add user to role, please try again later.");
     }
 }
