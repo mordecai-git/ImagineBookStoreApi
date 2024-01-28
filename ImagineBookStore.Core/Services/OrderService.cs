@@ -14,12 +14,22 @@ using System.Text.Json;
 
 namespace ImagineBookStore.Core.Services;
 
+/// <summary>
+/// Implementation of order-related service operations.
+/// </summary>
 public class OrderService : IOrderService
 {
     private readonly BookStoreContext _context;
     private readonly HttpClient _httpClient;
     private readonly UserSession _userSession;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="OrderService"/> class.
+    /// </summary>
+    /// <param name="context">The database context for order-related operations. See <see cref="BookStoreContext"/>.</param>
+    /// <param name="userSession">The user session information. See <see cref="UserSession"/>.</param>
+    /// <param name="httpClientFactory">The HTTP Client Factory used for communicating with Paystack API</param>
+    /// <param name="paystackConfig">Paystack configuration from appsettings.json</param>
     public OrderService(BookStoreContext context, UserSession userSession, IHttpClientFactory httpClientFactory, IOptions<PasystackConfig> paystackConfig)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
@@ -29,6 +39,7 @@ public class OrderService : IOrderService
         _httpClient = httpClientFactory.CreateClient(paystackConfig.Value.HttpClientName);
     }
 
+    /// <inheritdoc cref="IOrderService.AttemptPayment"/>
     public async Task<Result> AttemptPayment(int orderId)
     {
         var paymentData = await _context.Orders
@@ -36,12 +47,13 @@ public class OrderService : IOrderService
             .ProjectToType<PaymentRequestView>()
             .FirstOrDefaultAsync();
 
-        if (paymentData == null) return new ErrorResult("Invalid order.");
+        if (paymentData == null) return new NotFoundErrorResult("Invalid order.");
         if (paymentData.IsPaid) return new ErrorResult("Payment has been completed.");
 
         return new SuccessResult(paymentData);
     }
 
+    /// <inheritdoc cref="IOrderService.ConfirmPayment"/>
     public async Task<Result> ConfirmPayment(int orderId)
     {
         var order = await _context.Orders
@@ -49,9 +61,9 @@ public class OrderService : IOrderService
             .Where(x => x.Id == orderId)
             .FirstOrDefaultAsync();
 
-        if (order == null) return new ErrorResult("Invalid order.");
+        if (order == null) return new NotFoundErrorResult("Invalid order.");
 
-        if (order.IsPaid) return new ErrorResult("Order fulfilled.");
+        if (order.IsPaid) return new ErrorResult("Order payment is already completed.");
 
         var verifyTransaction = await VerifyTransaction(order.Reference);
 
@@ -70,6 +82,7 @@ public class OrderService : IOrderService
         return new SuccessResult("Payment completed successfully.");
     }
 
+    /// <inheritdoc cref="IOrderService.GetOrderItems"/>
     public Result GetOrderItems(int orderId)
     {
         var orderItems = _context.OrderItems
@@ -79,6 +92,7 @@ public class OrderService : IOrderService
         return new SuccessResult(orderItems);
     }
 
+    /// <inheritdoc cref="IOrderService.ListOrders"/>
     public async Task<Result> ListOrders(PagingOptionModel request)
     {
         var allOrders = await _context.Orders
@@ -89,6 +103,7 @@ public class OrderService : IOrderService
         return new SuccessResult(allOrders);
     }
 
+    /// <inheritdoc cref="IOrderService.PlaceOrder"/>
     public async Task<Result> PlaceOrder()
     {
         var carts = _context.Carts
@@ -148,6 +163,9 @@ public class OrderService : IOrderService
             : new ErrorResult("An error occurred while placing the order");
     }
 
+    /// <summary>
+    /// Initiates a transaction with the payment provider.
+    /// </summary>
     private async Task<PaystackResponse<TransactionResponse>> InitiateTransaction(InitiateTransactionModel model)
     {
         StringContent jsonContent = model.ToJsonContent();
@@ -162,6 +180,9 @@ public class OrderService : IOrderService
         return response;
     }
 
+    /// <summary>
+    /// Verifies a transaction with the payment provider.
+    /// </summary>
     private async Task<PaystackResponse<VerifyTransactionResponse>> VerifyTransaction(string reference)
     {
         using HttpResponseMessage httpResponse = await _httpClient.GetAsync($"/transaction/verify/{reference}");

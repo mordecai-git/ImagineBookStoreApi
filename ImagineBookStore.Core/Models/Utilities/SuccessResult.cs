@@ -80,6 +80,12 @@ public class SuccessResult : Result
     /// <inheritdoc/>
     /// </summary>
     [JsonIgnore]
+    public new Paging Paging { get; set; }
+
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    [JsonIgnore]
     public new string Detail { get; set; }
 
     /// <summary>
@@ -173,6 +179,12 @@ public class SuccessResult<T> : Result<T>
     }
 
     // Ignore error related properties
+
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    [JsonIgnore]
+    public new Paging Paging { get; set; }
 
     /// <summary>
     /// <inheritdoc/>

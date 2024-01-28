@@ -4,6 +4,9 @@ using System.Net;
 
 namespace ImagineBookStore.Api.Controllers;
 
+/// <summary>
+/// Represents the base class that all controller class in the system should inherit.
+/// </summary>
 [ApiController]
 public class BaseController : ControllerBase
 {

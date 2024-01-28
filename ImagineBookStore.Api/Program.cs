@@ -1,9 +1,9 @@
-using Microsoft.OpenApi.Models;
 using ImagineBookStore.Core.Extensions;
-using Serilog;
 using ImagineBookStore.Core.Middlewares;
 using ImagineBookStore.Core.Models.Configurations;
 using ImagineBookStore.Core.Utilities;
+using Microsoft.OpenApi.Models;
+using Serilog;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -21,7 +21,6 @@ builder.Host.UseSerilog((hostContext, services, config) =>
     config.Enrich.FromLogContext();
     config.WriteTo.Console();
 });
-
 
 builder.Services.AddControllers();
 

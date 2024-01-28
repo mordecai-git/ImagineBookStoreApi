@@ -11,17 +11,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ImagineBookStore.Core.Services;
 
+/// <summary>
+/// Implementation of book-related services.
+/// </summary>
 public class BookService : IBookService
 {
     private readonly BookStoreContext _context;
     private readonly UserSession _userSession;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BookService"/> class.
+    /// </summary>
+    /// <param name="context">The database context for book information. See <see cref="BookStoreContext"/>.</param>
+    /// <param name="userSession">The user session information. See <see cref="UserSession"/>.</param>
     public BookService(BookStoreContext context, UserSession userSession)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         _userSession = userSession ?? throw new ArgumentNullException(nameof(userSession));
     }
 
+    /// <inheritdoc cref="IBookService.AddBook"/>
     public async Task<Result> AddBook(BookModel model)
     {
         // validate if book exist
@@ -43,11 +52,12 @@ public class BookService : IBookService
             : new ErrorResult(StaticErrorMessages.UnableToSaveChanges);
     }
 
+    /// <inheritdoc cref="IBookService.DeleteBook"/>
     public async Task<Result> DeleteBook(int bookId)
     {
         Book book = await _context.Books.FindAsync(bookId);
 
-        if (book == null) return new ErrorResult("Book does not exist");
+        if (book == null) return new NotFoundErrorResult("Book does not exist");
 
         if (book.IsDeleted) return new SuccessResult();
 
@@ -62,19 +72,21 @@ public class BookService : IBookService
             : new ErrorResult(StaticErrorMessages.UnableToSaveChanges);
     }
 
+    /// <inheritdoc cref="IBookService.GetBook"/>
     public async Task<Result> GetBook(int bookId)
     {
         Book book = await _context.Books
             .Where(b => b.Id == bookId && !b.IsDeleted)
             .FirstOrDefaultAsync();
 
-        if (book == null) return new ErrorResult("Book does not exist");
+        if (book == null) return new NotFoundErrorResult("Book does not exist");
 
         BookView mappedBook = book.Adapt<BookView>();
 
         return new SuccessResult(mappedBook);
     }
 
+    /// <inheritdoc cref="IBookService.ListBooks"/>
     public async Task<Result> ListBooks(PagingOptionModel request)
     {
         var allBooks = await _context.Books
@@ -82,16 +94,17 @@ public class BookService : IBookService
             .ProjectToType<BookView>()
             .ToPaginatedListAsync(request.PageIndex, request.PageSize);
 
-        return new SuccessResult(allBooks);
+        return new PagedSuccessResult(allBooks);
     }
 
+    /// <inheritdoc cref="IBookService.UpdateBook"/>
     public async Task<Result> UpdateBook(int bookId, BookModel model)
     {
         Book book = await _context.Books
             .Where(b => b.Id == bookId && !b.IsDeleted)
             .FirstOrDefaultAsync();
 
-        if (book == null) return new ErrorResult("Book does not exist");
+        if (book == null) return new NotFoundErrorResult("Book does not exist");
 
         // update the record with the model
         model.Adapt(book);
