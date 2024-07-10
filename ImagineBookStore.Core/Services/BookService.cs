@@ -1,10 +1,10 @@
 ﻿using ImagineBookStore.Core.Extensions;
 using ImagineBookStore.Core.Interfaces;
-using ImagineBookStore.Core.Models.App;
-using ImagineBookStore.Core.Models.Input;
-using ImagineBookStore.Core.Models.Utilities;
-using ImagineBookStore.Core.Models.View;
 using ImagineBookStore.Core.Utilities;
+using ImagineBookStore.Model.App;
+using ImagineBookStore.Model.Input;
+using ImagineBookStore.Model.Utilities;
+using ImagineBookStore.Model.View;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;

@@ -1,4 +1,4 @@
-﻿using ImagineBookStore.Core.Models.Input;
+﻿using ImagineBookStore.Model.Input;
 using Microsoft.AspNetCore.Http;
 
 namespace ImagineBookStore.Core.Middlewares;

@@ -1,6 +1,6 @@
-using ImagineBookStore.Core.Models.Input;
-using ImagineBookStore.Core.Models.Utilities;
-using ImagineBookStore.Core.Models.View;
+using ImagineBookStore.Model.Input;
+using ImagineBookStore.Model.Utilities;
+using ImagineBookStore.Model.View;
 
 namespace ImagineBookStore.Core.Interfaces;
 

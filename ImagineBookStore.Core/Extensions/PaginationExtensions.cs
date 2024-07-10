@@ -1,4 +1,4 @@
-﻿using ImagineBookStore.Core.Models.Utilities;
+﻿using ImagineBookStore.Model.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ImagineBookStore.Core.Extensions;

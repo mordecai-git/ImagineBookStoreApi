@@ -1,5 +1,5 @@
-using ImagineBookStore.Core.Models.App;
-using ImagineBookStore.Core.Models.Utilities;
+using ImagineBookStore.Model.App;
+using ImagineBookStore.Model.Utilities;
 
 namespace ImagineBookStore.Core.Interfaces;
 

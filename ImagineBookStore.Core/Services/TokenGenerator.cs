@@ -1,9 +1,9 @@
 using ImagineBookStore.Core.Constants;
 using ImagineBookStore.Core.Interfaces;
-using ImagineBookStore.Core.Models.App;
-using ImagineBookStore.Core.Models.Configurations;
-using ImagineBookStore.Core.Models.Utilities;
-using ImagineBookStore.Core.Models.View;
+using ImagineBookStore.Model.App;
+using ImagineBookStore.Model.Configurations;
+using ImagineBookStore.Model.Utilities;
+using ImagineBookStore.Model.View;
 using Mapster;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

@@ -4,7 +4,58 @@
         <name>ImagineBookStore.Api</name>
     </assembly>
     <members>
-        <member name="M:ImagineBookStore.Api.Controllers.BaseController.ProcessResponse(ImagineBookStore.Core.Models.Utilities.Result)">
+        <member name="T:ImagineBookStore.Api.Controllers.AuthController">
+            <summary>
+            API controller for managing authentication in the application.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Api.Controllers.AuthController.#ctor(ImagineBookStore.Core.Interfaces.IAuthService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Api.Controllers.AuthController"/> class.
+            </summary>
+            <param name="authService">The authentication service to be injected.</param>
+        </member>
+        <member name="M:ImagineBookStore.Api.Controllers.AuthController.AuthenticateUser(ImagineBookStore.Model.Input.LoginModel)">
+            <summary>
+            Authenticates a user and generates an authentication token.
+            </summary>
+            <remarks>
+            This endpoint authenticates a user and generates an authentication token. <br/>
+            Requires no authentication.
+            </remarks>
+            <param name="model">The model representing the user's login credentials.</param>
+            <response code="200">Returns the authenticated user's authentication data.</response>
+            <response code="400">Returns an error object indicating what went wrong.</response>
+        </member>
+        <member name="M:ImagineBookStore.Api.Controllers.AuthController.LogoutUser(System.String)">
+            <summary>
+            Logs out a user with the specified user reference.
+            </summary>
+            <remarks>
+            This endpoint logs out a user with the specified user reference. <br/>
+            Requires no authentication.
+            </remarks>
+            <param name="userReference">The user reference for whom the logout operation should be performed.</param>
+            <response code="200">Returns a successful message if the logout operation is successful.</response>
+        </member>
+        <member name="M:ImagineBookStore.Api.Controllers.AuthController.SignUp(ImagineBookStore.Model.Input.RegisterModel)">
+            <summary>
+            Signs up a new user in the application.
+            </summary>
+            <remarks>
+            This endpoint creates a new user account. <br/>
+            Requires no authentication.
+            </remarks>
+            <param name="model">The model representing the user registration data.</param>
+            <response code="201">Returns the created user's authentication data.</response>
+            <response code="400">Returns an error object indicating what went wrong.</response>
+        </member>
+        <member name="T:ImagineBookStore.Api.Controllers.BaseController">
+            <summary>
+            Represents the base class that all controller class in the system should inherit.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Api.Controllers.BaseController.ProcessResponse(ImagineBookStore.Model.Utilities.Result)">
             <summary>
             Returns the appropriate HTTP Response.
             </summary>
@@ -18,16 +69,16 @@
         </member>
         <member name="M:ImagineBookStore.Api.Controllers.BooksController.#ctor(ImagineBookStore.Core.Interfaces.IBookService)">
             <summary>
-            Initializes a new instance of the <see cref="T:ImagineBookStore.Api.Controllers.BooksController" /> class.
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Api.Controllers.BooksController"/> class.
             </summary>
             <param name="bookService">The book service to be injected.</param>
         </member>
-        <member name="M:ImagineBookStore.Api.Controllers.BooksController.AddBook(ImagineBookStore.Core.Models.Input.BookModel)">
+        <member name="M:ImagineBookStore.Api.Controllers.BooksController.AddBook(ImagineBookStore.Model.Input.BookModel)">
             <summary>
             Adds a new book to the application.
             </summary>
             <remarks>
-            This endpoint adds a new book to the database, the title must be unique to the author. <br />
+            This endpoint adds a new book to the database, the title must be unique to the author. <br/>
             Requires an Admin role to access this.
             </remarks>
             <param name="model">This represents the book object to be added.</param>
@@ -39,7 +90,7 @@
             Delete a book
             </summary>
             <remarks>
-             Deletes a book with the specified identifier. <br />
+             Deletes a book with the specified identifier. <br/>
             Requires an Admin role to access this.
             </remarks>
             <param name="bookId">The integer identifier of the book to be deleted.</param>
@@ -57,28 +108,141 @@
             <response code="200">Returns the book object.</response>
             <response code="404">Returns Not Found if book does not exist.</response>
         </member>
-        <member name="M:ImagineBookStore.Api.Controllers.BooksController.ListBooks(ImagineBookStore.Core.Models.Input.PagingOptionModel)">
+        <member name="M:ImagineBookStore.Api.Controllers.BooksController.ListBooks(ImagineBookStore.Model.Input.PagingOptionModel)">
             <summary>
             List Books
             </summary>
             <remarks>
             Lists books based on the provided paging options.
             </remarks>
-            <param name="request">The <see cref="T:ImagineBookStore.Core.Models.Input.PagingOptionModel" /> containing the paging options.</param>
+            <param name="request">The <see cref="T:ImagineBookStore.Model.Input.PagingOptionModel"/> containing the paging options.</param>
             <response code="200">Returns the list of books in a paginated format.</response>
         </member>
-        <member name="M:ImagineBookStore.Api.Controllers.BooksController.UpdateBook(System.Int32,ImagineBookStore.Core.Models.Input.BookModel)">
+        <member name="M:ImagineBookStore.Api.Controllers.BooksController.UpdateBook(System.Int32,ImagineBookStore.Model.Input.BookModel)">
             <summary>
             Update a Book details
             </summary>
             <remarks>
-            Updates details of a book with the specified identifier. <br />
+            Updates details of a book with the specified identifier. <br/>
             Requires an Admin role to access this.
             </remarks>
             <param name="bookId">The identifier of the book to be updated.</param>
             <param name="model">The object representing the updated details of the book.</param>
             <response code="200">Returns the updated book object.</response>
             <response code="404">Returns not found if book does not exist.</response>
+        </member>
+        <member name="T:ImagineBookStore.Api.Controllers.CartsController">
+            <summary>
+            API controller for managing carts in the application.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Api.Controllers.CartsController.#ctor(ImagineBookStore.Core.Interfaces.ICartService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Api.Controllers.CartsController"/> class.
+            </summary>
+            <param name="cartService">The cart service to be injected.</param>
+        </member>
+        <member name="M:ImagineBookStore.Api.Controllers.CartsController.AddToCart(ImagineBookStore.Model.Input.CartModel)">
+            <summary>
+            Adds an item to the user's cart.
+            </summary>
+            <remarks>
+            This endpoint adds an item to the user's cart. If the item already exist in the cart, it just updates the quantity of them item in the cart. <br/>
+            Requires authentication.
+            </remarks>
+            <param name="model">The model representing the item to be added to the cart.</param>
+            <response code="200">Returns a success response.</response>
+        </member>
+        <member name="M:ImagineBookStore.Api.Controllers.CartsController.RemoveFromCart(System.Int32)">
+            <summary>
+            Removes an item from the user's cart.
+            </summary>
+            <remarks>
+            This endpoint removes an item from the user's cart. <br/>
+            Requires authentication.
+            </remarks>
+            <param name="cartId">The identifier of the item to be removed from the cart.</param>
+            <response code="200">Returns the updated cart information.</response>
+            <response code="404">Returns Not Found if item does not exist in the cart.</response>
+        </member>
+        <member name="M:ImagineBookStore.Api.Controllers.CartsController.ListCarts">
+            <summary>
+            Lists items in the user's cart.
+            </summary>
+            <remarks>
+            This endpoint lists items in the user's cart. <br/>
+            Requires authentication.
+            </remarks>
+            <response code="200">Returns the list of items in the user's cart.</response>
+        </member>
+        <member name="T:ImagineBookStore.Api.Controllers.OrdersController">
+            <summary>
+            API controller for managing orders in the application.
+            </summary>
+        </member>
+        <member name="M:ImagineBookStore.Api.Controllers.OrdersController.#ctor(ImagineBookStore.Core.Interfaces.IOrderService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ImagineBookStore.Api.Controllers.OrdersController"/> class.
+            </summary>
+            <param name="orderService">The order service to be injected.</param>
+        </member>
+        <member name="M:ImagineBookStore.Api.Controllers.OrdersController.AttemptPayment(System.Int32)">
+            <summary>
+            Attempts to retry payment for an order.
+            </summary>
+            <remarks>
+            This endpoint attempts to retry payment for an order with the specified identifier. <br/>
+            Requires authentication.
+            </remarks>
+            <param name="orderId">The identifier of the order for which payment is to be retried.</param>
+            <response code="200">Returns the payment information.</response>
+            <response code="404">Returns Not Found if the order for which payment should be retried does not exist.</response>
+        </member>
+        <member name="M:ImagineBookStore.Api.Controllers.OrdersController.ConfirmPayment(System.Int32)">
+            <summary>
+            Confirms payment for an order.
+            </summary>
+            <remarks>
+            This endpoint confirms payment for an order with the specified identifier. <br/>
+            Requires authentication.
+            </remarks>
+            <param name="orderId">The identifier of the order for which payment is to be confirmed.</param>
+            <response code="200">Returns the updated order information.</response>
+            <response code="404">Returns Not Found if order for which payment should be confirmed does not exist.</response>
+            <response code="400">Returns an error if any occurred.</response>
+        </member>
+        <member name="M:ImagineBookStore.Api.Controllers.OrdersController.GetOrderItems(System.Int32)">
+            <summary>
+            Retrieves items in an order.
+            </summary>
+            <remarks>
+            This endpoint retrieves items in an order with the specified identifier. <br/>
+            Requires authentication.
+            </remarks>
+            <param name="orderId">The identifier of the order for which items are to be retrieved.</param>
+            <response code="200">Returns the list of items in the order.</response>
+        </member>
+        <member name="M:ImagineBookStore.Api.Controllers.OrdersController.ListOrders(ImagineBookStore.Model.Input.PagingOptionModel)">
+            <summary>
+            Lists orders.
+            </summary>
+            <remarks>
+            This endpoint lists orders based on the provided paging options. <br/>
+            Requires authentication.
+            </remarks>
+            <param name="request">The parameters containing the paging options.</param>
+            <response code="200">Returns the list of orders in a paginated format.</response>
+        </member>
+        <member name="M:ImagineBookStore.Api.Controllers.OrdersController.PlaceOrder">
+            <summary>
+            Places a new order in the application.
+            </summary>
+            <remarks>
+            This endpoint places a new order in the application. <br/>
+            Requires authentication.
+            </remarks>
+            <response code="200">Returns the payment information required to continue the payment.</response>
+            <response code="400">Returns an error object indicating what went wrong.</response>
         </member>
     </members>
 </doc>

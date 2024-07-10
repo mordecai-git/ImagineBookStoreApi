@@ -1,4 +1,4 @@
-using ImagineBookStore.Core.Models.Utilities;
+using ImagineBookStore.Model.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;

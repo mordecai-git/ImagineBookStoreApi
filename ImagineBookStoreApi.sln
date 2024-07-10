@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImagineBookStore.Api", "Ima
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImagineBookStore.Core", "ImagineBookStore.Core\ImagineBookStore.Core.csproj", "{C788E2C9-1FF4-415F-8C2A-6253CB9245A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImagineBookStore.Model", "ImagineBookStore.Model\ImagineBookStore.Model.csproj", "{144183B7-1B87-40B9-8E6C-D67A0EAB6FB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C788E2C9-1FF4-415F-8C2A-6253CB9245A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C788E2C9-1FF4-415F-8C2A-6253CB9245A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C788E2C9-1FF4-415F-8C2A-6253CB9245A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{144183B7-1B87-40B9-8E6C-D67A0EAB6FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{144183B7-1B87-40B9-8E6C-D67A0EAB6FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{144183B7-1B87-40B9-8E6C-D67A0EAB6FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{144183B7-1B87-40B9-8E6C-D67A0EAB6FB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

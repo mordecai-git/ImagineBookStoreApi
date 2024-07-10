@@ -1,7 +1,7 @@
 using ImagineBookStore.Core.Extensions;
 using ImagineBookStore.Core.Middlewares;
-using ImagineBookStore.Core.Models.Configurations;
 using ImagineBookStore.Core.Utilities;
+using ImagineBookStore.Model.Configurations;
 using Microsoft.OpenApi.Models;
 using Serilog;
 

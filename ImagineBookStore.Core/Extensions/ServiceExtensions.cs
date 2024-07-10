@@ -1,9 +1,9 @@
 using FluentValidation;
 using ImagineBookStore.Core.Interfaces;
-using ImagineBookStore.Core.Models.App;
-using ImagineBookStore.Core.Models.Input;
-using ImagineBookStore.Core.Models.View;
 using ImagineBookStore.Core.Services;
+using ImagineBookStore.Model.App;
+using ImagineBookStore.Model.Input;
+using ImagineBookStore.Model.View;
 using Mapster;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;

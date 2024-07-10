@@ -1,7 +1,7 @@
 ﻿using ImagineBookStore.Core.Interfaces;
-using ImagineBookStore.Core.Models.App;
-using ImagineBookStore.Core.Models.App.Constants;
-using ImagineBookStore.Core.Models.Input;
+using ImagineBookStore.Model.App;
+using ImagineBookStore.Model.App.Constants;
+using ImagineBookStore.Model.Input;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;

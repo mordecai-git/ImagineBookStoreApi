@@ -1,7 +1,7 @@
 ﻿using ImagineBookStore.Core.Constants;
 using ImagineBookStore.Core.Interfaces;
-using ImagineBookStore.Core.Models.Configurations;
-using ImagineBookStore.Core.Models.View;
+using ImagineBookStore.Model.Configurations;
+using ImagineBookStore.Model.View;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Controllers;

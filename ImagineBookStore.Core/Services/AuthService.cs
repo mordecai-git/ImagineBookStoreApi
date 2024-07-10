@@ -1,8 +1,8 @@
 using ImagineBookStore.Core.Interfaces;
-using ImagineBookStore.Core.Models.App;
-using ImagineBookStore.Core.Models.Input;
-using ImagineBookStore.Core.Models.Utilities;
 using ImagineBookStore.Core.Utilities;
+using ImagineBookStore.Model.App;
+using ImagineBookStore.Model.Input;
+using ImagineBookStore.Model.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
